@@ -1,0 +1,61 @@
+<subheader title="Blocked Accounts"></subheader>
+
+
+<!-- <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+    <div class="card-body">
+        <h5 class="box-title">Accounts </h5> -->
+
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-fullheight">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-4">
+                            <div>
+                                <!-- <h5 class="box-title mb-2">Accounts</h5> -->
+                                <!-- <div class="text-muted font-13">Fraudulent Transactions</div> -->
+                            </div>
+                        </div>
+                        <div class="card-fullwidth-block">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="thead-default thead-lg">
+                                        <tr>
+                                            <th  class="pl-4">Account Number</th>
+                                            <th>Date blocked</th>
+                                    </thead>
+                                    <tbody >
+                                        <tr *ngFor="let acc of accounts">
+                                            <td  class="pl-4">{{acc.useraccid}}</td>
+                                            <td (click)="profile(i)">{{acc.createdAt | date:'short'}}</td>
+                                        </tr>
+                                    </tbody>
+                                 
+                                </table>
+                              
+                            </div>
+                            <div class="row" >
+                                <div class="col-sm-12 col-md-5">
+                                  </div>
+                                  <div class="col-sm-12 col-md-7">
+                                      <div class="dataTables_paginate paging_simple_numbers" id="dt-base_paginate">
+                                          <ul class="pagination  justify-content-end">
+                                              <li class="paginate_button page-item " *ngIf="previous"><a aria-controls="dt-base" data-dt-idx="1" tabindex="0" class="page-link" (click)="previousmethod()">Previous</a></li>
+                                              <li class="paginate_button page-item " *ngFor="let page of pages"><span aria-controls="dt-base"  style = "cursor: default;" data-dt-idx="1" tabindex="0" class="page-link">{{page.page}}</span></li>
+                                              <li class="paginate_button page-item " *ngIf="nextpage"><a aria-controls="dt-base" data-dt-idx="7" tabindex="0" class="page-link" (click)="getnextransactiondata()">Next</a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--        
+    </div>
+</div> -->
+
+
+

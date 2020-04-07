@@ -1,0 +1,25 @@
+.btn-space {
+    margin-right: 10px;
+}
+
+.text-primary {
+    color: black !important;
+}
+
+.btn-primary {
+    /* color: #00BA7B !important; */
+    background-color: transparent;
+    background-image: none;
+    border-color: #2949ef !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #2949ef !important;
+    border-color: #2949ef !important;
+}
+
+.btn-outline-success:hover {
+    background-color: #2949ef !important;
+    color: white !important;
+}

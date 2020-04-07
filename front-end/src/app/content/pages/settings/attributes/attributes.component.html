@@ -1,0 +1,117 @@
+<div class="row">
+    <div class="col-lg-8">
+        <subheader title='Attributes'></subheader>
+    </div>
+    <div class="col-lg-4 pull-right">
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+            <h5>Standard Attributes</h5>
+        </div>
+        <div class="row">
+            <div class="col-lg-4" *ngFor="let i of myattr; let j = index">
+                <div>
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action flexbox " >{{j + 1}}.&nbsp;{{addspaces(i)}}</a>
+                        <small><em class="text-muted ml-4">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-title">
+                    <h5>Custom Attributes</h5>
+                    <div class="text-danger small">&nbsp;&nbsp;&nbsp;* Please exclude standard attributes from the custom attributes list. Custom attributes are case sensitive.</div>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="list?.length == 0">
+                <form [formGroup]="uploadExcel">
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Upload Attributes</label>
+                        <input type="file" formControlName="excel" (change)="upload($event.target.files)" class=" form-control-file" id="file ">
+                        <div *ngIf="hasError('excel', 'requiredFileType')" class="text-danger mt-2">Only Excel Files Allowed </div>
+                    </div>
+                </form>
+                <a download="sample" target="_blank" href="../../../../../assets/img/sample.ods">
+                  Click here to download sample file
+                </a>
+                <!-- <button class="btn btn-light"><i class="ti ti-download">Download sample file</i></button> -->
+            </div>
+            <div class="col-md-4" *ngIf="list?.length > 0">
+                <button class="btn btn-primary pull-right" (click)="openVerticallyCentered(content)"><i class="ft ft-plus"></i>&nbsp;Add Attribute</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4" *ngFor="let i of list; let j = index">
+                <div>
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action flexbox " href="javascript:;">{{j + 1}}.&nbsp;{{i.attribute | titlecase}}
+                                <span class="ml-2 text-dark" style="font-size:15px;"><i class="ti-pencil widget-icon2" (click)="editAttribute(edit, i)"></i></span>
+                                <span class="ml-3 text-danger" style="font-size:15px;"><i class="ti-close widget-icon2 text-danger " (click)="deleteattribute(i._id)"></i></span>
+                            <!-- <i class="ft ft-edit-2 btn btn-btn-transparent text-success ml-1" (click)="editAttribute(edit, i)"></i><i class="ft ft-x text-danger btn-btn-transparent" (click)="deleteattribute(i._id)"></i> -->
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title font-15">Add A Custom Attribute</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group mb-4">
+            <label for="exampleInputEmail1">Attribute</label>
+            <input class="form-control" id="exampleInputEmail1" [(ngModel)]="attributedata.attribute" type="text" aria-describedby="emailHelp" placeholder="Enter Attribute"></div>
+
+        <label for="exampleInputPassword1">Datatype</label>
+        <select [(ngModel)]="attributedata.datatype" class="browser-default custom-select">
+          <option value=""> Select Attribute</option>
+            <option value="boolean">boolean</option>
+            <option value="number">number</option>
+            <option value="string">string</option>
+        </select>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="addattribute()"><i class="ft ft-plus"></i>&nbsp;Add</button>
+    </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title font-15">Edit Custom Attribute</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group mb-4">
+            <label for="exampleInputEmail1">Attribute</label>
+            <input class="form-control" id="exampleInputEmail1" [(ngModel)]="attributedata.attribute" type="text" aria-describedby="emailHelp" placeholder="Enter Attribute"></div>
+
+        <label for="exampleInputPassword1">Datatype</label>
+        <select class="browser-default custom-select">
+            <option selected *ngFor="let i of list " value="{{i.datatype}}" >{{i.datatype}}</option>
+        </select>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="editMyAttribute()"><i class="ft ft-check"></i>&nbsp;Save</button>
+    </div>
+</ng-template>
+
+<ng-template #LoginModal let-modal>
+        <app-modal ></app-modal>
+      </ng-template>

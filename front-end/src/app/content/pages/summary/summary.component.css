@@ -1,0 +1,133 @@
+.data-widget-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 40px;
+    color: #6a89d7;
+}
+.hold {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%; width: 100%;
+}
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: auto;
+    content: "";
+    background-color: rgba(0,0,0,0);
+}
+    /* .data-widget-icon {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        font-size: 20px !important;
+        color: #2949EF !important;
+    }
+     */
+    /* .data-widget-icon2 {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        font-size: 30px !important;
+        color: #2949EF !important;
+    } */
+
+    .data-widget-excel {
+        font-size: 20px !important;
+    }
+
+    /* .data-widget-icons {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        font-size: 30px !important;
+        color: #fd7e14 !important;
+    } */
+
+    ft-alert-triangle {
+        color: #fd7e14 !important;
+    }
+
+    .data-widget-cards {
+        position: absolute !important;
+        top: 20px !important;
+        right: 20px !important;
+        font-size: 30px !important;
+        /* color: #FE4D2E !important; */
+    }
+
+    .card-text{
+        margin-left: -19px !important;
+    }
+
+
+
+
+
+
+
+
+
+
+
+    .excel {
+        margin-top: 6%;
+        /* margin-bottom: -5px; */
+    }
+
+
+    img {
+        max-width: 10% !important;
+    }
+
+    .message {
+        padding-top: 2rem !important;
+    }
+
+
+
+
+    .search {
+        margin-top: 12%;
+    }
+
+
+
+
+
+
+    .truncateid {
+        width: 100px;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+
+
+
+
+
+    a[_ngcontent-c10] {
+        padding: 0px !important;
+        cursor: pointer;
+    }
+
+    .truncate {
+        width: 110px;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+
+      .table td {
+        cursor: pointer;
+      }

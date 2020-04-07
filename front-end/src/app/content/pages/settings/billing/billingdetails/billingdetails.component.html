@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-9">
+        <subheader title='Billing Details'></subheader>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-fullheight">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5> Enter your billing details</h5>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- <button class="btn btn-primary pull-right" (click)="savecarddetails()"><i class="ft ft-tick"></i>&nbsp;Save</button> -->
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-8 mb-3"><label for="validationCustom01">Company Name</label><input class="form-control" id="validationCustom01" [(ngModel)]="billingdetails.companyname" type="text" placeholder="Company Name" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-8 mb-3"><label for="validationCustom02">Address</label><input class="form-control" id="validationCustom02" [(ngModel)]="billingdetails.address" type="text" placeholder="Address" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-8 mb-3"><label for="validationCustom03">City</label><input class="form-control" id="validationCustom03" [(ngModel)]="billingdetails.city" type="text" placeholder="City" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3"><label for="validationCustom04">State/Province</label><input class="form-control" [(ngModel)]="billingdetails.state" id="validationCustom04" type="text" placeholder="State" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-4 mb-3"><label for="validationCustom05">Zip/Postcode</label><input class="form-control" id="validationCustom05" type="text" [(ngModel)]="billingdetails.zip" placeholder="Zip" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class=" col-md-4 form-group mb-4">
+                        <label>Country</label>
+                        <select class="form-control" [(ngModel)]="billingdetails.country">
+                          <option *ngFor="let i of countries" [ngValue]="i">{{i}}</option>
+                      </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary pull-right" (click)="savecarddetails()"><i class="ft ft-check"></i>&nbsp;Save</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-fullheight">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3"><label for="validationCustom01">Card Number</label><input type="tel" autocomplete="cc-number" id="cc-number" ccNum class="form-control" id="validationCustom01" [(ngModel)]="cardetails.cardno" type="text" placeholder="Card No." required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-12 mb-3"><label for="validationCustom01">Expiration Date</label><input class="form-control" id="validationCustom02" type="tel" type="tel" autocomplete="cc-exp" id="cc-exp" ccExp [(ngModel)]="cardetails.exp" placeholder="mm/yy" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+                    <div class="col-md-12 mb-3"><label for="validationCustom02">Cardholder Name</label><input class="form-control" id="validationCustom03" [(ngModel)]="cardetails.holdername" type="text" placeholder="Cardholder Name" required="">
+                        <div class="valid-feedback">Looks good!</div>
+                    </div>
+
+                </div>
+                <button class="btn btn-primary pull-right mt-3" (click)="savecarddata()">Proceed &nbsp;<i class="ft ft-chevron-right"></i></button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #LoginModal let-modal>
+        <app-modal ></app-modal>
+      </ng-template>

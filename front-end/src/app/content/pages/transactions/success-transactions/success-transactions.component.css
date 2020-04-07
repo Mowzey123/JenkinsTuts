@@ -1,0 +1,70 @@
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #2949EF !important;
+}
+
+tfoot {
+  display: table-header-group !important;
+  vertical-align: middle;
+  border-color: inherit;
+}
+
+
+
+.search {
+  margin-top: 12%;
+}
+
+img {
+  max-width: 30% !important;
+}
+
+.status {
+  text-align: center;
+}
+
+.shake {
+  /* animation-duration: 6s !important;
+  animation-delay: 2s !important; */
+  width: 80px !important;
+  animation-iteration-count: infinite;
+}
+
+img[_ngcontent-c10] {
+  max-width: 30% !important;
+}
+
+.text-primary {
+color:#2949EF !important;
+}
+
+.table tbody tr {
+  vertical-align: bottom;
+  /* border-bottom: 1px solid #dee2e6 !important; */
+  border-top: 0px solid #dee2e6 !important;
+  /* font-weight: 600; */
+}
+
+
+
+.truncate {
+  width: 100px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table th {
+  width: 10% !important;
+  white-space: nowrap;
+}
+
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 1px solid #dee2e6 !important;
+  border-top: 1px solid #dee2e6 !important;
+  font-weight: 600;
+}

@@ -1,0 +1,57 @@
+<subheader title="Reports"></subheader>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card card-fullheight">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-5">
+                    <div>
+                        <h5 class="box-title mb-2">Consumption per day</h5>
+                        <div class="text-muted font-13">Simple Subtitle</div>
+                    </div>
+                </div>
+                <div>
+                    <canvas baseChart height="280"
+                        [datasets]="lineChart.data"
+                        [labels]="lineChart.labels"
+                        [options]="lineChart.options"
+                        [colors]="lineChart.colors"
+                        [chartType]="lineChart.type">
+                        </canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card card-fullheight">
+            <div class="card-body">
+                <div class="d-flex justify-content-between mb-5">
+                    <div>
+                        <h5 class="box-title mb-2">consumption by product</h5>
+                        <div class="text-muted font-13">Simple Subtitle</div>
+                    </div>
+                </div>
+                <div class="mb-5">
+                    <canvas baseChart height="220"
+                        [data]="doughnutChart.data"
+                        [labels]="doughnutChart.labels"
+                        [chartType]="doughnutChart.type"
+                        [legend]="doughnutChart.legend"
+                        [colors]="doughnutChart.colors"
+                        [options]="doughnutChart.options"></canvas>
+                </div>
+                <div>
+                    <div class="flexbox mb-3">
+                        <div><span class="badge-point badge-warning rounded-0 mr-2"></span><span>Bureau</span></div><span class="h6 mb-0 font-16">+28%</span>
+                    </div>
+                    <div class="flexbox mb-3">
+                        <div><span class="badge-point badge-primary rounded-0 mr-2"></span><span>Risk</span></div><span class="h6 mb-0 font-16">$9570</span>
+                    </div>
+                    <div class="flexbox mb-2">
+                        <div><span class="badge-point badge-danger rounded-0 mr-2"></span><span>Fraud manager</span></div><span class="h6 mb-0 font-16">$3540</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

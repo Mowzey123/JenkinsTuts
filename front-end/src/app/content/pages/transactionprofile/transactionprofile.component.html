@@ -1,0 +1,217 @@
+<div class="row">
+    <div class="col-md-8">
+        <h5 class="text-left "><strong>Transaction ID</strong>: &nbsp;
+            <span class="text-primary font-8">{{profdata?.transactionid}}</span>
+        </h5>
+    </div>
+    <div class="col-md-4">
+        <span><a routerLink={{url}} class="btn btn-secondary"><i class="ft ft-chevron-left"></i>&nbsp;Back</a></span>
+        <span *ngIf="profdata?.finalstatus == true"><button style="margin-right: 5px;" class="btn btn-primary pull-right" (click)="openBackDropCustomClass1(warningupdate)"><i class="ft ft-refresh-cw data-widget-icon" ></i>&nbsp;  Update Fraud Status</button></span>
+        <span *ngIf="profdata?.finalstatus == false"><button style="margin-right: 5px;" class="btn btn-danger pull-right" (click)="openBackDropCustomClass3(warning)"><i class="ft ft-shield data-widget-icon" ></i>&nbsp; Report Fraud</button></span>
+    </div>
+    <div class="col-md-3">
+    </div>
+</div>
+<hr class="my-4">
+<div class="row mt-5">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Account</h5>
+                <hr>
+                <p class="card-text"><strong>Account Number</strong>: &nbsp;{{ profdata?.acctno }}</p>
+                <p class="card-text"><strong>Subscription ID</strong>: &nbsp; <span class="font-size-12">N/A</span></p>
+                <p class="card-text"><strong>Phone Number</strong>: &nbsp; <span class="font-size-12">N/A</span></p>
+                <p class="card-text"><strong>Creation Date</strong>: &nbsp;{{profdata?.creationDate}}</p>
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Transaction</h5>
+                <hr>
+                <p class="card-text"><strong>Amount</strong>: &nbsp;{{numberWithCommas(profdata?.amount)}}</p>
+                <p class="card-text"><strong>Payment Method</strong>: &nbsp; <span *ngIf="profdata?.paymentmethod !== 'mobilemoney'">{{profdata?.paymentmethod}}</span> <span *ngIf="profdata?.paymentmethod == 'mobilemoney'">Mobile Money</span></p>
+                <p class="card-text"><strong>Product</strong>:&nbsp; {{profdata?.product}}</p>
+                <p class="card-text"><strong>Date</strong>: &nbsp;{{profdata?.date | date:'short'}}</p>
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Device</h5>
+                <hr>
+                <p class="card-text"><strong>Device ID</strong>: {{profdata?.deviceid}}</p>
+                <p class="card-text"><strong>IMEI</strong>: {{profdata?.imei}}</p>
+                <p class="card-text"><strong>Channel ID</strong>: {{profdata?.channelid}}</p>
+                <!-- <p class="card-text">Address :</p> -->
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Billing</h5>
+                <hr>
+                <p class="card-text"><strong>Card Type</strong>:&nbsp;<span>N/A</span></p>
+                <p class="card-text"><strong>Credit Card Number</strong>:&nbsp;<span>N/A</span></p>
+                <p class="card-text"><strong>Card Holder Name</strong>:&nbsp;<span>N/A</span></p>
+                <p class="card-text"><strong>Address</strong>:&nbsp;<span>N/A</span></p>
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div class="col-lg-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title text-primary">Checks Performed</h5>
+            <hr>
+            <p><strong>Blacklist Checks</strong>: <span  class="text-primary" *ngIf="profdata?.blacklisted == false">Passed</span><span class="text-danger" *ngIf="profdata?.blacklisted == true">Failed</span></p>
+            <p><strong>Reason</strong>:&nbsp; <span *ngIf="profdata?.listedunder == ''">Ok</span>{{profdata?.listedunder}} </p>
+            <hr style="border-top: dashed 1px;" />
+            <p><strong>Rules Engine</strong>: <span class="text-primary"  *ngIf="profdata?.rulesflag == false">Passed</span><span class="text-danger" *ngIf="profdata?.rulesflag == true ">Failed</span><span class="text-warning" *ngIf="profdata?.rulesflag == 'pending'">Not processed</span></p>
+            <p><strong>Reason</strong>: &nbsp; <span *ngIf="profdata?.rulesflag == false">Ok</span>  <span *ngIf="profdata?.rulesflag == true">{{profdata?.rulesengineaction}}</span></p>
+            <hr style="border-top: dashed 1px;" />
+            <p><strong>ML Checks</strong>: <span class="text-primary" *ngIf="profdata?.fraudflag == false">Passed</span><span class="text-danger" *ngIf="profdata?.fraudflag == true">Failed</span> <span class="text-primary" *ngIf="profdata?.fraudflag == 'pending'">Not processed</span> </p>
+            <p><strong>Reason</strong>:&nbsp;<span *ngIf="profdata?.fraudmessage">{{profdata?.fraudmessage}}</span> <span *ngIf="profdata?.fraudmessage == ''">Ok</span></p>
+            <hr style="border-top: dashed 1px;" />
+
+        </div>
+    </div>
+</div>
+    <div class="col-lg-4">
+      <div class="card h-100">
+          <div class="card-body">
+              <h5 class="card-title text-primary">Fraud Result</h5>
+              <hr>
+              <div class="text-center">
+                <!-- <span *ngIf="data?.fraudflag == true"><i class="ft ft-alert-triangle data-widget-icons text-warning"></i></span> -->
+                <span *ngIf="profdata?.finalstatus == 'onhold'"><i class="ft ft-alert-triangle data-widget-icons text-warning"></i></span>
+                <span *ngIf="profdata?.finalstatus == true"><i class="ft ft-alert-circle data-widget-icons text-danger"></i></span>
+                <span *ngIf="profdata?.finalstatus == false"><i class="ft ft-check data-widget-icons text-success"></i></span>
+
+              </div>
+              <div>
+
+              <p class="card-text text-center mt-3"><span style = "font-size:25px;" *ngIf="profdata?.finalstatus == false">Not fraud</span><span style = "font-size:25px;" class="font-25" *ngIf="profdata?.finalstatus == true">Fraud</span><span style = "font-size:25px;" class="font-25" *ngIf="profdata?.finalstatus == 'onhold'">On hold</span></p>
+              <div class="mt-5">
+                  <p class="card-text"><strong>Date Detected</strong>: &nbsp;<span>N/A</span></p>
+                  <p class="card-text"><strong>Updates</strong>: &nbsp;<a style = "cursor: pointer;" class="text-primary" (click)="openBackDropCustomClass2(content)">View History</a> </p>
+              </div>
+          </div>
+
+          </div>
+      </div>
+    </div>
+</div>
+
+<ng-template #LoginModal let-modal>
+    <app-modal></app-modal>
+</ng-template>
+
+
+
+<ng-template #update let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Reason </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="form-group">
+          <!-- <label for="inputZip">Reason</label> -->
+          <textarea class="form-control"  rows="5" id="comment"  [(ngModel)]="comment"></textarea>
+          <!-- <input class="form-control"  id="inputZip" type="text"> -->
+      </div>
+  </div>
+  <div class="modal-footer">
+        <fieldset class="w-100">
+
+      <button *ngIf="profdata?.finalstatus == false" class=" btn btn-danger pull-right"  (click)="reportfraud()"><i class="ft ft-shield"></i>&nbsp;Report</button>
+      <button *ngIf="profdata?.finalstatus == true" class=" btn btn-primary pull-right"  (click)="reportfraud()"><i class="ft ft-refresh-cw"></i>&nbsp;Update</button>
+      </fieldset>
+    </div>
+</ng-template>
+
+<ng-template #warningupdate let-modal>
+  <div class="modal-body mt-3">
+    <h5>Are you sure you want to approve this transaction as <strong class="text-danger">NOT</strong> fraudulent ?</h5>
+  </div>
+  <div class="modal-footer ml-2 mr-2">
+      <!-- <button class="pull-left btn btn-danger" (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;No</button>
+      <button class="pull-right btn btn-success" (click)="openBackDropCustomClass(update)"><i class="ft ft-check"></i>&nbsp;Yes</button> -->
+          <fieldset class="w-100">
+            <button class="pull-left btn btn-danger" (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;No</button>
+            <button class="pull-right btn btn-success float-right" (click)="openBackDropCustomClass(update)"><i class="ft ft-check"></i>&nbsp;Yes</button>
+          </fieldset>
+  </div>
+</ng-template>
+
+<ng-template #warning let-modal>
+  <div class="modal-body mt-3">
+    <h5>Are you sure you want to report this transaction as fraudulent ?</h5>
+  </div>
+  <div class="modal-footer">
+    <fieldset class="w-100">
+        <button class=" btn btn-danger" (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;No</button>
+        <button class="pull-right btn btn-success" (click)="openBackDropCustomClass(update)"><i class="ft ft-check"></i>&nbsp;Yes</button>
+    </fieldset>
+  </div>
+</ng-template>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title text-primary">Update history</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </button>
+      <span aria-hidden="true">&times;</span>
+
+  </div>
+  <div class="modal-body" *ngIf="logdata?.length > 0">
+      <div *ngFor="let i of logdata">
+          <p><strong  class="ml-3">Updated By</strong>:&nbsp;{{i?.userid?.firstname}} {{i?.userid?.lastname}}</p>
+          <p><strong  class="ml-3">Status Set</strong>:&nbsp;<span *ngIf="i?.fraudflag == false">Not Fraud</span><span *ngIf="i?.fraudflag == true">Fraud</span></p>
+          <p><strong  class="ml-3">Comment</strong>:&nbsp;{{i?.comment}}</p>
+          <p><strong  class="ml-3">Updated At</strong>:&nbsp;{{i?.updatedAt | date:'short'}}</p>
+          <hr style="border-top: dashed 1px;" />
+
+        </div>
+  </div>
+  <div class="modal-body" *ngIf="logdata?.length === 0">
+      <div >
+          <p><strong class="ml-3">Updated By</strong>:&nbsp;<span>N/A</span></p>
+          <p><strong class="ml-3">Status Set</strong>:&nbsp;<span>N/A</span></p>
+          <p><strong class="ml-3">Comment</strong>:&nbsp;<span>N/A</span></p>
+          <p><strong class="ml-3">Updated At</strong>:&nbsp;<span>N/A</span></p>
+          <hr style="border-top: dashed 1px;" /> 
+        </div>
+  </div>
+  <div class="modal-footer">
+      <button  class=" btn btn-primary pull-right"  (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;Close</button>
+  </div>
+</ng-template> 
+
+

@@ -1,0 +1,224 @@
+<subheader title="Post record" ></subheader>
+
+<!-- <intl-tel-input [preferredCountries]="['nl', 'gb', 'de', 'be']" [enablePlaceholder]="true" name="phoneNumber" ngModel></intl-tel-input> -->
+
+
+<ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title">Product</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="form-horizontal"  #f="ngForm" (ngSubmit)="add(f.value)">
+                    <div class="form-group">
+                        <label for="exampleFormControlInput"> Add Product</label>
+                        <input class="form-control" ngModel  type="text" name="productname"  placeholder="Product name">
+                    </div>
+                    <button class="btn btn-primary pull-right"><i class="ft ft-plus"></i>&nbsp;Add product</button>
+            </form>
+        </div>
+</ng-template>
+<div class="row">
+    <div class="col-lg-12">
+        <card [fullheight]="true">
+        
+          <form #f="ngForm" (ngSubmit)="save()">
+                <h5 class="card-title pt-4">Account Details</h5>
+                <div class="row">
+                    <!-- Account Details -->
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label>Customer Name</label>
+                            <input class="form-control" [(ngModel)]="transOb.transactionData.accountDetails.name" name="name" type="text" placeholder="Customer Name">
+                        </div>
+                        <div class="form-group required mb-4">
+                            <label class="control-label">Account Id</label>
+                            <div class=" small pb-4"><i class="ft ft-info text-muted"></i>&nbsp;&nbsp;&nbsp;<span class=" text-muted">If phone number it should be in the format +2567XXXXXXXX.</span> </div>
+                            <input class="form-control" [(ngModel)]="transOb.transactionData.accountDetails.userId" name="userId" type="text" placeholder="Account Id">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group mb-4">
+                            <label>Phone number</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <button class="btn btn-secondary">+256</button>
+                                </div>
+                                <input class="form-control" [(ngModel)]="transOb.transactionData.accountDetails.phoneno" name="phoneno" type="text" maxlength="9" placeholder="Enter Phone">
+                            </div>
+                          </div>
+                 
+                        <div class="form-group mb-4">
+                            <label>National Document Number</label>
+                            <input class="form-control" [(ngModel)]="transOb.transactionData.accountDetails.nin" name="nin" type="text" placeholder="National Document Number">
+                        </div>
+                    </div>
+                </div>    
+                     <!-- Purchase details -->
+                     <h5 class="card-title pt-4">Purchase Details</h5>
+                <div class="row">
+                        <div class="col-md-6">
+                                <div class="form-group required mb-4">
+                                    <div class="row"> 
+                                        <div class="col-md-6">
+                                            <label class="control-label">Product Purchased</label>
+        
+                                            <select class="form-control" [(ngModel)]="transOb.transactionData.productDetails.name" name="units" id="exampleFormControlSelect1">
+                                                    <option value="">Select product</option>
+                                                    <option  *ngFor="let product of products" >{{product}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div style="padding-top: 1.8rem!important;">
+                                                    <button class="btn btn-light btn-floating" (click)="openBackDropCustomClass(content)" type="button"><i class="ti-plus"></i></button><br>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group required mb-4">
+                                    <label class="control-label">Amount</label>
+                                    <input class="form-control"  [(ngModel)]="transOb.transactionData.amount.amount" name="amount" type="number" placeholder="Amount">
+                                </div>
+        
+                                <div class="form-group">
+                                        <label>Recipient number</label>
+                                        <input class="form-control" [(ngModel)]="transOb.recipient.rcphone" name="rcphone" type="text" placeholder="+2567XXXXXXXX">
+
+                                        <!-- <international-phone-number   [(ngModel)]="transOb.recipient.rcphone" name="rcphone"  placeholder="Enter mobile number" [maxlength]="20" [defaultCountry]="'ug'" [required]="true"  name="phone_number" [allowedCountries]="['ug','rw','in', 'ca', 'us','tz','ke']"></international-phone-number> -->
+        
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Account number</label>
+                                        <input class="form-control"  [(ngModel)]="transOb.recipient.rcaccno" name="rcaccno" placeholder="Account number" >
+                                    </div>
+                                  
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group  required mb-4">
+                                        <label class="control-label">Transaction Date</label>
+                                    <div class="input-group">
+                                            <input class="form-control" name="mydate"  placeholder="Select a date" 
+                                            angular-mydatepicker #dp="angular-mydatepicker" 
+                                            [(ngModel)]="model" [options]="myDpOptions" 
+                                            (dateChanged)="getDate($event)"/>
+                                            <div class="input-group-append">
+                                                <button type="button" class="btn btn-secondary" (click)="dp.toggleCalendar()">
+                                                    <i class="ft ft-calendar"></i>
+                                                </button>
+                                            </div>
+                                    </div>
+                                    </div>
+                                    
+                                    <div class="form-group required mb-4">
+                                        <label class="control-label">Time</label>
+                                        <ngb-timepicker [(ngModel)]="time" name='time' [meridian]="meridian"></ngb-timepicker>
+                                    </div>
+                                    <div class="form-group">
+                                            <label>Utility number</label>
+                                            <input class="form-control"  [(ngModel)]="transOb.recipient.rcutilityno" name="rcutilityno" placeholder="Utility number" >
+                                        </div>
+                            </div>
+                </div>
+                   
+                <h5 class="card-title pt-4"> Fraud Details</h5>
+
+                <div class="row">
+                    <div class="col-md-6">
+                    <div class="form-group required mb-4">
+                        <label class="control-label" for="fraudtypes">Fraud Type</label>
+                        <div class=" small pb-4"><i class="ft ft-info text-muted"></i>&nbsp;&nbsp;&nbsp;<span class=" text-muted">Select the Fraud Type.</span> </div>
+
+                            <select  class="form-control" [(ngModel)]="transOb.fraudtype" name="fraudtype" id="fraudtypes" >
+                                    <option value="">Select Fraud Type</option>
+                                    <option value="Payment Fraud">Payment Fraud</option>
+                                    <option value="Product Fraud">Product Fraud</option>
+                            </select>
+                    </div>
+                   <!-- </div> -->
+
+                    </div>
+                    <div class="col-md-6">
+                       <div class="form-group required">
+                           <label class="control-label">Fraud Comment</label>
+                           <input class="form-control"  [(ngModel)]="transOb.comment" name="comment" placeholder="Fraud comment" >
+                       </div>
+                    </div>
+                </div>
+                    <!-- Payment Details -->
+                    <h5 class="card-title pt-4">Payment Details</h5>
+
+                 <div class="row">
+                        <div class="col-md-6">
+                                <div class="form-group required mb-4">
+                                    <label class="control-label" for="exampleFormControlSelect9">Payment Method</label>
+                                        <select  class="form-control" [(ngModel)]="transOb.transactionData.paymentMethod.name" name="method" id="exampleFormControlSelect9" (change)="ChangeSortOrder($event)">
+                                                <option value="">Select payment method</option>
+                                                <option value="bankcard">Bank Card</option>
+                                                <option value="mobilemoney">Mobile Money</option>
+                                                <option value="wallet">Wallet</option>
+                                        </select>
+                                </div>
+        
+                                <div [ngSwitch]='selectedSortOrder'>
+                                        <div *ngSwitchCase="'bankcard'">
+                                            <div class="form-inline form-success mb-4" action="javascript:;">
+                                                <label class="sr-only" for="prefix">Prefix</label>
+                                                <input class="form-control mb-2 mr-sm-2 mb-sm-0x" [(ngModel)]="transOb.transactionData.paymentMethod.details.prefix" name="prefix" id="prefix" type="text" placeholder="prefix"  maxlength="4">
+                                                <span class=" text-muted">first 4 digits</span>
+
+                                                <label class="sr-only" for="suffix">Suffix</label>
+                                                <input class="form-control mb-2 mr-sm-2 mb-sm-0x" [(ngModel)]="transOb.transactionData.paymentMethod.details.suffix" name="suffix" id="suffix" type="text" placeholder="suffix"  maxlength="4">
+                                                <span class=" text-muted">last 4 digits</span>
+                                            </div>
+                                        </div>
+                                    
+                                        <div *ngSwitchCase="'mobilemoney'">
+                                            <div class="form-group">
+                                                    <div class="pb-4"><a style="cursor: pointer;" class="small text-primary" (click)="copyPhoneno()">Same as phone number</a></div>
+        
+                                                <international-phone-number   [(ngModel)]="transOb.transactionData.paymentMethod.details.msisdn" name="msisdn"  placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'ug'" [required]="true"  name="phone_number" [allowedCountries]="['ug']"></international-phone-number>
+                                            </div>
+                                        </div>
+                                        <div *ngSwitchCase="'wallet'">
+                                            <div class="form-inline form-success mb-4">
+                                                <label class="sr-only" for="prefix">Wallet</label>
+                                                <input class="form-control mb-2 mr-sm-2 mb-sm-0x" [(ngModel)]="transOb.transactionData.paymentMethod.details.accountid" name="accountid" id="accountid" type="text" placeholder="account Id">
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                            <label>Device Details</label>
+                                            <div class=" form-success mb-4" action="javascript:;">
+                                                <label class="sr-only" for="prefix">Address</label>
+                                                <input class="form-control mb-2 mr-sm-2 mb-sm-0x" [(ngModel)]="transOb.transactionData.deviceDetails.imei" name="imei" id="prefix" type="text" placeholder="IMEI">
+                                                <label class="sr-only" for="suffix">Street</label>
+                                                <input class="form-control mb-2 mr-sm-2 mb-sm-0x" [(ngModel)]="transOb.transactionData.deviceDetails.deviceId" name="deviceId" id="suffix" type="text" placeholder="device Id">
+                                            </div>    
+                                        </div>
+        
+                            </div>
+                 </div>
+
+
+                
+
+                <!-- </div> -->
+               
+                <div class="form-group float-right">
+                    <button class="btn btn-primary mr-2" type="submit">Submit</button>
+                    <button class="btn btn-light" type="reset">Clear</button>
+                </div>
+            </form>
+        </card>
+      </div>
+  </div>
+
+  <ng-template #LoginModal let-modal>
+    <app-modal ></app-modal>
+  </ng-template>

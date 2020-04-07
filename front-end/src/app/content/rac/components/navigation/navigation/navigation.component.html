@@ -1,0 +1,49 @@
+<ul class="sidebar-menu metismenu" id="sidenav">
+    <ng-container *ngFor="let item of navigation">
+        <ng-container *ngIf="item.heading; else unset">
+            <li class="heading" *ngIf="item.title !='BUREAU' && item.title !='ACCOUNT' "><span class="font-weight-bold">{{item.title}}</span></li>
+            <li class="heading mt-4" *ngIf="item.title == 'BUREAU' || item.title == 'ACCOUNT'"><span class="font-weight-bold">{{item.title}}</span></li>
+        </ng-container>
+
+        <ng-template #unset>
+
+            <ng-container *ngIf="!item.childrens; else hasChildBlock">
+                <li *ngIf="!item.exact">
+                    <a routerLink="{{item.url}}" routerLinkActive="active">
+                        <i class="sidebar-item-icon" [ngClass]="item.icon"></i>
+                        <span *ngIf="item.title != 'Fraud Manager'" class="nav-label">{{item.title}}</span>
+                        <span *ngIf="item.title == 'Fraud Manager'" class="nav-label">{{item.title}} <span class="badge badge-primary pl-2">Free</span></span>
+                        
+                    </a>
+                </li>
+                <li *ngIf="item.exact">
+                    <a routerLink="{{item.url}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                        <i class="sidebar-item-icon" [ngClass]="item.icon"></i>
+                        <span class="nav-label">{{item.title}}</span>
+                    </a>
+                </li>
+            </ng-container>
+
+            <ng-template #hasChildBlock>
+                <li routerLinkActive="active">
+                    <a href='javascript:;'>
+                        <i class="sidebar-item-icon" [ngClass]="item.icon"></i>
+                        <span class='nav-label'>{{item.title}}</span>
+                        <i class="arrow la la-angle-right"></i>
+                    </a>
+                    <ul class="nav-2-level collapse" routerLinkActive="in">
+                        <ng-container *ngFor="let child of item.childrens">
+                            <ng-container *ngIf="!child.childrens">
+                                <li *ngIf="child.exact"><a routerLink="{{item.url + child.url}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{child.title}}</a></li>
+                                <!-- <li *ngIf="child.exact"><a  routerLink="{{item.url + child.url}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{child.title}}</a></li> -->
+                                <li *ngIf="!child.exact"><a routerLink="{{item.url + child.url}}" routerLinkActive="active">{{child.title}}</a></li>
+                                <!-- <li *ngIf="!child.exact"><a *ngIf="role !=='admin' && child.title !== 'Users'" routerLink="{{item.url + child.url}}" routerLinkActive="active">{{child.title}}</a></li> -->
+
+                            </ng-container>
+                        </ng-container>
+                    </ul>
+                </li>
+            </ng-template>
+        </ng-template>
+    </ng-container>
+</ul>

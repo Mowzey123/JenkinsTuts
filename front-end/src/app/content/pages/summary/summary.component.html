@@ -1,0 +1,186 @@
+<div class="Risk Dashboard">
+    <subheader title='Risk Dashboard'>
+    </subheader>
+
+
+    <div class="row">
+        <div class="col-3">
+         <a  style="cursor: pointer !important; padding: 0px !important" (click)="pendingTransactions()"> 
+
+            <div class="card">
+                <div class="card-body">
+
+                    <h6 class="mb-3 font-15 text-muted font-weight-normal">ON HOLD</h6>
+                    <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(alertsdatatiles.onholdtoday)}}</div><i class="ft-thumbs-down data-widget-icon"></i>
+                </div>
+            </div>
+            </a>
+
+        </div>
+        <div class="col-3">
+                <a style="cursor: pointer; padding: 0px !important" (click)="resolvedTransactions()">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal">RESOLVED TODAY</h6>
+                        <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(alertsdatatiles.resolvedtransactionstoday )}}</div><i class="ft-thumbs-up data-widget-icon"></i>
+                    </div>
+                </div>
+                </a>
+            </div>
+        <div class="col-3">
+                <a style="cursor: pointer; padding: 0px !important" (click)="confirmedFraud()">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="mb-3 font-15 text-muted font-weight-normal">FRAUD TODAY</h6>
+                    <div class="h2 mb-0 font-weight-normal">{{numberWithCommas((alertsdatatiles.confirmedfraudtoday))}}</div><i class="ft-slash data-widget-icon"></i>
+                </div>
+            </div>
+                </a>
+        </div>
+        
+        <div class="col-3">
+            <a style="cursor: pointer; padding: 0px !important"  (click)="successfulTransactions()">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="mb-3 font-15 text-muted font-weight-normal">SUCCESSFUL TODAY</h6>
+                    <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(alertsdatatiles.passed )}}</div><i class="ft-check-circle data-widget-icon"></i>
+                </div>
+            </div>
+            </a>
+        </div>
+    </div>
+ 
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                            <div>
+                                <h5 class="box-title mb-2">Activity</h5>
+                                <div class="text-muted font-13">7 days</div>
+                            </div>
+                        </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div>
+                                <div style="height: 168px">
+                                        <canvas baseChart height="168px" 
+                                            [data]="doughnutChart.data"
+                                            [labels]="doughnutChart.labels"
+                                            [chartType]="doughnutChart.type"
+                                            [legend]="doughnutChart.legend"
+                                            [colors]="doughnutChart.colors"
+                                            [options]="doughnutChart.options"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+           
+            </div>
+            <div class="card">
+                    <div class="card-body">
+                            <div class="d-flex justify-content-between mb-5">
+                                <div>
+                                    <h5 class="box-title mb-2">Weekly Trasactions</h5>
+                                    <div class="text-muted font-13">Last 7 days</div>
+                                </div>
+                            </div>
+                        <div>
+                            <div class="h6">On Hold</div>
+                            <div class="media align-items-center mb-4">
+                                <div class="media-body">
+                                    <div class="progress" style="height: 10px; box-shadow: 0 4px 4px rgba(0,0,0,.08);">
+                                        <div class="progress-bar" role="progressbar" [style.width]="onholdwidth" style="background-color: #6f42c1;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div><span class="h5 mb-0 ml-4">{{onholdwidth}}</span>
+                            </div>
+                            <div class="h6">Fraudulent</div>
+                            <div class="media align-items-center mb-4">
+                                <div class="media-body">
+                                    <div class="progress" style="height: 10px; box-shadow: 0 4px 4px rgba(0,0,0,.08);">
+                                        <div class="progress-bar" role="progressbar" [style.width]="fraudwidth" style="background-color:#e83e8c ;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div><span class="h5 mb-0 ml-4">{{fraudwidth}}</span>
+                            </div>
+                            <div class="h6">Successful</div>
+                            <div class="media align-items-center mb-4">
+                                <div class="media-body">
+                                    <div class="progress" style="height: 10px; box-shadow: 0 4px 4px rgba(0,0,0,.08);">
+                                        <div class="progress-bar" role="progressbar" [style.width]="successwidth" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div><span class="h5 mb-0 ml-4">{{successwidth}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+       <div class="col-lg-6">
+            <div class="card card-fullheight" style="max-height: 500 !important; min-height: 500 !important;">
+
+                    <div class="card-body" >
+                        <div class="d-flex justify-content-between mb-5">
+                            <div>
+                                <h5 class="box-title mb-2">Activity</h5>
+                                <div class="text-muted font-13">7 days</div>
+                            </div>
+                        </div>
+                        <div>
+                            <canvas baseChart height="500"
+                                [datasets]="stackedBarChart2.data"
+                                [labels]="stackedBarChart2.labels"
+                                [options]="stackedBarChart2.options"
+                                [colors]="stackedBarChart2.colors"
+                                [chartType]="stackedBarChart2.type">
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+       </div>
+    </div>
+
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-fullheight">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-4">
+                            <div>
+                                <h5 class="box-title mb-2">Most Recent Fraud</h5>
+                                <div class="text-muted font-13">Fraudulent Transactions</div>
+                            </div>
+                        </div>
+                        <div class="card-fullwidth-block">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="thead-default thead-lg">
+                                        <tr>
+                                            <!-- <th class="pl-4">Transaction ID</th> -->
+                                            <th  class="pl-4">Date</th>
+                                            <th>Account</th>
+                                            <th>Product</th>
+                                            <th>Amount</th>
+                                            <th class="pr-4">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr *ngFor="let i of latestfraud">
+                                            <td  class="pl-4" (click)="profile(i)">{{i.transactiondata.transactionDate | date:'short'}}</td>
+                                            <td (click)="profile(i)">{{i.transactiondata.accountDetails.userId}}</td>
+                                            <td (click)="profile(i)">{{i.transactiondata.productDetails.name}}</td>
+                                            <td (click)="profile(i)">{{numberWithCommas(i.transactiondata.amount.amount)}}</td>
+                                            <td class="text-danger">Fraud</td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+
+        <ng-template #LoginModal let-modal>
+            <app-modal></app-modal>
+        </ng-template>

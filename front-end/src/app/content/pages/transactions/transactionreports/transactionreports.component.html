@@ -1,0 +1,470 @@
+<div class="Risk Dashboard">
+    <subheader title='Reports'>
+    </subheader>
+
+    <div>
+        <div>
+            <!-- doughnutChart  -->
+            <div class="row mb-2">
+                <div class="col-lg-6">
+                    <div class="card card-body"  *ngIf="pieChart1?.length > 0 ; else nodata" style="max-height: 300 !important; min-height: 300px !important;">
+                        <h5 class="box-title">
+                            Fraudulent Transactions & Successful Transactions
+                        </h5>
+                        <div style="height: 168px">
+                            <canvas baseChart height="168px" 
+                                [data]="pieChart1"
+                                [chartType]="doughnutChart.type"
+                                [legend]="doughnutChart.legend"
+                                [labels]="doughnutChart.labels"
+                                [colors]="doughnutChart.colors"
+                                [options]="doughnutChart.options">
+                            </canvas>
+                        </div>
+                    </div>
+                    <ng-template #nodata>
+                        <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+                            <div class="card-body">
+                                <h5>
+                                    Fraudulent Transactions & Successful Transactions
+                                </h5>
+                                <mat-progress-spinner  style="margin-top:15% !important;  margin-left:45% !important; margin-bottom:15% !important;"
+                                    class = "tp-margin"
+                                    [diameter]="50" 
+                                    [color] = "color"
+                                    [mode] = "mode"
+                                    [value] = "values" *ngIf="showSpinner">
+                                </mat-progress-spinner>
+                                <div class="text-center pt-3" *ngIf="show" style="height: 168px">
+                                    <img src="assets/img/image.png" style = "margin-top: inherit;">
+                                    <p class="message">No transactions Yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card" *ngIf="FdVsSusted.length > 0; else showimage" style="max-height: 300 !important; min-height: 300px !important;">
+                        <div class="card-body">
+                            <h5 class="box-title">Transactions On hold by category</h5>
+                            <div style="height: 168px">
+                                <canvas baseChart height="168px" 
+                                    [data]="FdVsSusted"
+                                    [chartType]="doughnutChart0.type"
+                                    [labels]="doughnutChart0.labels"
+                                    [legend]="doughnutChart0.legend"
+                                    [colors]="doughnutChart0.colors"
+                                    [options]="doughnutChart0.options">
+                                </canvas>
+                            </div> 
+                        </div>
+                    </div>
+                    <ng-template #showimage>
+                        <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+                            <div class="card-body">
+                                <h5>Transactions On hold by category</h5>
+                                <mat-progress-spinner  style="margin-top:15% !important;  margin-left:45% !important; margin-bottom:15% !important;"
+                                    class = "tp-margin"
+                                    [diameter]="50" 
+                                    [color] = "color"
+                                    [mode] = "mode"
+                                    [value] = "values" *ngIf="showSpinner">
+                                </mat-progress-spinner>
+                                <div class="text-center pt-3" *ngIf="show" style="height: 168px">
+                                    <img src="assets/img/image.png" style = "margin-top: inherit;">
+                                    <p class="message">No transactions Yet</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-template>
+                   
+                </div>
+            </div>
+    </div>
+    <subheader title="Fraudulent Transactions">
+        </subheader>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">Today</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span>&nbsp;{{numberWithCommas(count1)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(confirmedtoday)}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This Week</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span>&nbsp;{{numberWithCommas(count2)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(confirmedweek)}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This Month</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span> &nbsp;{{numberWithCommas(count3)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(confirmedmonth)}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This Year</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span>&nbsp;{{numberWithCommas(count4)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(confirmedyear)}}</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="row mb-2">
+       
+            <div class="col-lg-6">
+                <div class="card"  *ngIf="pieChart2.length > 0 ; else nopayment" style="max-height: 300 !important; min-height: 300px !important;">
+                    <div class="card-body">
+                        <h5 class="box-title">Fraudulent by Payment Method</h5>
+                        <div style="height: 168px">
+                            <canvas baseChart height="168px" 
+                                [data]="doughnutChart2.data"
+                                [chartType]="doughnutChart2.type"
+                                [labels]="doughnutChart2.labels"
+                                [legend]="doughnutChart2.legend"
+                                [colors]="doughnutChart2.colors"
+                                [options]="doughnutChart2.options">
+                            </canvas>
+                        </div>  
+                    </div>
+                </div>
+
+                <ng-template #nopayment>
+                    <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+                        <div class="card-body">
+                            <h5>Fraudulent by Payment Method</h5>
+                            <mat-progress-spinner  style="margin-top:15% !important;  margin-left:45% !important; margin-bottom:15% !important;"
+                                class = "tp-margin"
+                                [diameter]="50" 
+                                [color] = "color"
+                                [mode] = "mode"
+                                [value] = "values" *ngIf="showSpinner">
+                            </mat-progress-spinner>
+                            <div class="text-center pt-3" *ngIf="show" style="height: 168px">
+                                <img src="assets/img/image.png" style = "margin-top: inherit;">
+                                <p class="message">No transactions Yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card" *ngIf="doughnutChart2.data?.length > 0 ; else noproduct" style="max-height: 300 !important; min-height: 300px !important;">
+                    <div class="card-body">
+                        <h5 class="box-title">Fraudulent by Product</h5>
+                        <div style="height: 168px">
+                            <canvas baseChart height="168px" 
+                                [data]="doughnutChart1.data"
+                                [chartType]="doughnutChart1.type"
+                                [legend]="doughnutChart1.legend"
+                                [labels]="doughnutChart1.labels"
+                                [colors]="doughnutChart1.colors"
+                                [options]="doughnutChart1.options">
+                            </canvas>
+                        </div>   
+                    </div>
+                </div>
+                <ng-template #noproduct>
+                    <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+                        <div class="card-body">
+                            <h5>Fraudulent by Product</h5>
+                            <mat-progress-spinner  style="margin-top:15% !important;  margin-left:45% !important; margin-bottom:15% !important;"
+                                class = "tp-margin"
+                                [diameter]="50" 
+                                [color] = "color"
+                                [mode] = "mode"
+                                [value] = "values" *ngIf="showSpinner">
+                            </mat-progress-spinner>
+                            <div class="text-center pt-3" *ngIf="show" style="height: 168px">
+                                <img src="assets/img/image.png" style = "margin-top: inherit;">
+                                <p class="message">No transactions Yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+
+
+        <subheader title="On Hold Transactions">
+        </subheader>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">Today</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span>&nbsp;{{numberWithCommas(suscount1)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(sustoday)}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This Week</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span>&nbsp;{{numberWithCommas(suscount2)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(susweek)}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This Month</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span> &nbsp;{{numberWithCommas(suscount3)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(susmonth)}}</small></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This Year</h6>
+                        <div class="h4 mb-0 font-weight-normal"><span class="text-muted font-13"></span>&nbsp;{{numberWithCommas(suscount4)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted"><small>UGX {{numberWithCommas(susyear)}}</small></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="row mb-2">
+       
+            <div class="col-lg-6">
+                <div class="card"  *ngIf="pieChart5.length > 0 " style="max-height: 300 !important; min-height: 300px !important;">
+                    <div class="card-body">
+                        <h5 class="box-title">On Hold by Payment Method</h5>
+                        <div style="height: 168px">
+                            <canvas baseChart height="168px" 
+                                [data]="pieChart5"
+                                [chartType]="doughnutChart4.type"
+                                [labels]="doughnutChart4.labels"
+                                [legend]="doughnutChart4.legend"
+                                [colors]="doughnutChart4.colors"
+                                [options]="doughnutChart4.options">
+                            </canvas>
+                        </div>  
+                    </div>
+                </div>
+
+                <!-- <ng-template #nopayment> -->
+                    <div class="card"  *ngIf="pieChart5.length == 0 " style="max-height: 300 !important; min-height: 300px !important;">
+                        <div class="card-body">
+                            <h5>Fraudulent by Payment Method</h5>
+                            <mat-progress-spinner  style="margin-top:15% !important;  margin-left:45% !important; margin-bottom:15% !important;"
+                                class = "tp-margin"
+                                [diameter]="50" 
+                                [color] = "color"
+                                [mode] = "mode"
+                                [value] = "values" *ngIf="showSpinner">
+                            </mat-progress-spinner>
+                            <div class="text-center pt-3" *ngIf="show" style="height: 168px">
+                                <img src="assets/img/image.png" style = "margin-top: inherit;">
+                                <p class="message">No transactions Yet</p>
+                            </div>
+                        </div>
+                    </div>
+                <!-- </ng-template> -->
+
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card" *ngIf="pieChart4.length > 0 ; else noproducts" style="max-height: 300 !important; min-height: 300px !important;">
+                    <div class="card-body">
+                        <h5 class="box-title">On Hold by Product</h5>
+                        <div style="height: 168px">
+                            <canvas baseChart height="168px" 
+                                [data]="doughnutChart3.data"
+                                [chartType]="doughnutChart3.type"
+                                [legend]="doughnutChart3.legend"
+                                [labels]="doughnutChart3.labels"
+                                [colors]="doughnutChart3.colors"
+                                [options]="doughnutChart3.options">
+                            </canvas>
+                        </div>   
+                    </div>
+                </div>
+                <ng-template #noproducts>
+                    <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+                        <div class="card-body">
+                            <h5>On Hold by Product</h5>
+                            <mat-progress-spinner  style="margin-top:15% !important;  margin-left:45% !important; margin-bottom:15% !important;"
+                                class = "tp-margin"
+                                [diameter]="50" 
+                                [color] = "color"
+                                [mode] = "mode"
+                                [value] = "values" *ngIf="showSpinner">
+                            </mat-progress-spinner>
+                            <div class="text-center pt-3" *ngIf="show" style="height: 168px">
+                                <img src="assets/img/image.png" style = "margin-top: inherit;">
+                                <p class="message">No transactions Yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </div>
+        </div>    
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card" title='Line Chart' fullheight='true'>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                        <div>
+                            <h5 class="box-title mb-2">Transactions By Time</h5>
+                    </div>
+                         <div class="text-muted font-13">Last 30 days</div>
+                    </div>
+                    <div>
+                        <canvas baseChart height="300"
+                            [datasets]="lineChart2.data"
+                            [labels]="lineChart2.labels"
+                            [options]="lineChart2.options"
+                            [colors]="lineChart2.colors"
+                            [chartType]="lineChart2.type">
+                        </canvas>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <subheader title='Total Transactions'>
+    </subheader>
+    <div class="row">
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+    
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">Today</h6>
+                        <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(counttoday)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted mt-2"><small>UGX {{numberWithCommas(totaltoday)}}</small></div>
+
+                        <!-- </a> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This week</h6>
+                            <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(counteweek)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                            <div class="text-muted mt-2"><small>UGX {{numberWithCommas(totalweek)}}</small></div>
+
+                        </div>
+                    </div>
+                </div>
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This month</h6>
+                        <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(countmonth)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted mt-2"><small>UGX {{numberWithCommas(totalmonth)}}</small></div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="mb-3 font-15 text-muted font-weight-normal text-uppercase">This year</h6>
+                        <div class="h2 mb-0 font-weight-normal">{{numberWithCommas(countyear)}}</div><i class="ft-trending-up data-widget-icon"></i>
+                        <div class="text-muted mt-2"><small>UGX {{numberWithCommas(totalyear)}}</small></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-fullheight">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-5">
+                        <div>
+                            <h5 class="box-title mb-2">Transaction Trends</h5>
+                        </div>
+                        <div class="text-muted font-13">Last 6 months</div>
+                    </div>
+                    <div>
+                        <canvas baseChart height="300" [datasets]="lineChart.data" [labels]="lineChart.labels" [options]="lineChart.options" [colors]="lineChart.colors" [chartType]="lineChart.type"> </canvas>
+                    </div>
+                   
+                    <div class="flexbox flex-wrap mt-5">
+                        <div class="d-flex mb-4 mb-sm-0">
+                            <div class="pr-4 pr-sm-5">
+                                <h6 class="mb-2 font-15 text-muted">Fraudulent Today</h6>
+                                <div class="h4 mb-0 text-danger">{{suspected.today | number :'2.1-2'}}%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4 mb-sm-0">
+                            <div class="pr-4 pr-sm-5">
+                                <h6 class="mb-2 font-15 text-muted">Fraudulent This Week</h6>
+                                <div class="h4 mb-0 text-danger">{{suspected.week | number :'2.1-2'}}%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4 mb-sm-0">
+                            <div class="pr-4 pr-sm-5">
+                                <h6 class="mb-2 font-15 text-muted">Fraudulent This Month</h6>
+                                <div class="h4 mb-0 text-danger">{{suspected.month | number :'2.1-2'}}%</div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-4 mb-sm-0">
+                            <div class="pr-4 pr-sm-5">
+                                <h6 class="mb-2 font-15 text-muted">Fraudulent This Year</h6>
+                                <div class="h4 mb-0 text-danger">{{suspected.year | number :'2.1-2'}}%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flexbox flex-wrap mt-5">
+                            <div class="d-flex mb-4 mb-sm-0">
+                                <div class="pr-4 pr-sm-5">
+                                    <h6 class="mb-2 font-15 text-muted">On hold Today</h6>
+                                    <div class="h4 mb-0 text-primary">{{lastdata.today| number :'2.1-2'}}%</div>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4 mb-sm-0">
+                                <div class="pr-4 pr-sm-5">
+                                    <h6 class="mb-2 font-15 text-muted">On hold This Week</h6>
+                                    <div class="h4 mb-0 text-primary">{{lastdata.week | number :'2.1-2'}}%</div>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4 mb-sm-0">
+                                <div class="pr-4 pr-sm-5">
+                                    <h6 class="mb-2 font-15 text-muted">On hold This Month</h6>
+                                    <div class="h4 mb-0 text-primary">{{lastdata.month | number :'2.1-2'}}%</div>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-4 mb-sm-0">
+                                <div class="pr-4 pr-sm-5">
+                                    <h6 class="mb-2 font-15 text-muted mr-4">On hold This Year</h6>
+                                    <div class="h4 mb-0 text-primary">{{lastdata.year | number :'2.1-2'}}%</div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="flexbox flex-wrap mt-5">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #LoginModal let-modal>
+        <app-modal></app-modal>
+    </ng-template>

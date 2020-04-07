@@ -1,0 +1,909 @@
+<div class="row">
+  <div class="col-lg-9">
+      <h5 class='font-18'>Rules Engine</h5>
+      <p><small class="text-muted" >An application that manages decision processes using pre-defined logic to determine outcomes.</small></p>
+  </div>
+  <div class="col-lg-3 ">
+      <a style="color:white !important" (click)="back()" class="btn btn-primary pull-right"><i class="ft ft-chevron-left"></i>&nbsp;Back</a>
+  </div>
+</div>
+
+<div class="card mt-5">
+  <div class="card-body">
+      <div *ngIf="selectedrule =='Basic'">
+          <div class="row mb-3">
+              <div class=" col-lg-3 ">
+                  <h5 class="box-title">Basic Rule</h5>
+              </div>
+              <div class="col-lg-3">
+                  <!-- <label for="inputZip">Rule Name</label> -->
+              </div>
+              <div class="col-lg-6">
+              </div>
+          </div>
+      
+          <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group ruleName">
+                    <label for="exampleInputEmail1">Rule Name</label>
+                    <input #rulename="ngModel" aria-describedby="emailHelp" class="form-control" id="" [(ngModel)]="basicdata.name"type="text" required>
+                </div>
+                <div class="text-danger" *ngIf="rulename.touched && rulename.invalid" style="font-size: 80%; margin-top: 0.25rem; ">
+                        Rule name is required
+                </div>
+             </div>
+              <!-- <div class="col-lg-6">
+                  <input class="form-control name" id="inputZip" [(ngModel)]="basicdata.name" placeholder="Rule Name" type="text">
+              </div> -->
+          </div> 
+
+          <div class="row mt-3">
+              <div class="col-lg-3">
+                  <label for="inputZip">Attribute</label>
+                  <select class="form-control " [(ngModel)]="basicdata.attribute.keylevel" (change)="onChange($event, 0)">
+                      <option value="">Select an attribute</option>
+                      <option selected *ngFor="let o of attribute"
+                      [value]="o.keylevel"> {{o.key}} <span  *ngIf="o.keylevel !== ''">({{o.keylevel}}) </span></option>
+                      
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                    <label for="inputZip">Condition</label>
+                    <select class="form-control " [(ngModel)]="basicdata.condition">
+                    <option value="">Select a condition</option>
+                        <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                    </select>
+                  </div>
+              
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" *ngIf="objectselected0 !== 'paymentMethod0'">
+                      <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="basicdata.value" type="text">
+                  </div>
+                  <div class="form-group" *ngIf="objectselected0 === 'paymentMethod0'">
+                      <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                      <select class="form-control " [(ngModel)]="basicdata.value">
+                          <option value = "">select option</option>
+                          <option value = "wallet">Wallet</option>
+                          <option value = "bankcard">Bank Card</option>
+                          <option value = "mobilemoney">Mobile Money</option>
+                      </select>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                        <label for="inputZip">Rule  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Select an action"></i></span></label>
+                        <select class="form-control " [(ngModel)]="basicdata.rule" placement="top" ngbTooltip="Tooltip on the top">
+                          <option value="">Select rule</option>
+                            <option *ngFor="let i of rules" value="{{i.value}}">{{i.rule}}</option>
+                        </select>
+                  </div>
+                 
+              </div>
+          </div>
+      </div>
+
+      <div *ngIf="selectedrule=='Weight Based'">
+          <div class="row mb-5">
+              <div class="col-lg-3">
+                  <h5 class="box-title"> Weight based Rules</h5>
+              </div>
+              <div class="col-lg-3">
+
+              </div>
+              <div class="col-lg-6">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 mb-4">
+                    <div class="form-group ruleName">
+                        <label for="exampleInputEmail1">Rule Name</label>
+                        <input #rulename="ngModel" aria-describedby="emailHelp" class="form-control" id="" [(ngModel)]="weighteddata.name" type="text" required>
+                    </div>
+                    <div class="text-danger" *ngIf="rulename.touched && rulename.invalid" style="font-size: 80%; margin-top: 0.25rem; ">
+                            Rule name is required
+                    </div>
+                  <!-- <input class="form-control name" id="inputZip" [(ngModel)]="weighteddata.name" placeholder="Rule Name" type="text"> -->
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-3">
+                  <label for="inputZip">Attribute  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Tooltip on the top"></i></span></label>
+                  <select class="form-control " [(ngModel)]="weighteddata.attribute.key">
+                        <option value="">Select an attribute</option>
+                        <option selected *ngFor="let o of attribute"
+                        > {{o.key}}
+                        </option>
+                  </select>
+              </div>
+
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">Range (from)</label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="weighteddata.from" type="text">
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">To</label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="weighteddata.to" type="text">
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <label for="inputZip">Rule  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Tooltip on the top"></i></span></label>
+                  <select class="form-control " [(ngModel)]="weighteddata.rule">
+                        <option value="">Select a rule</option>
+
+                      <option *ngFor="let i of rules " value="{{i.value}}">{{i.rule}}</option>
+                  </select>
+              </div>
+          </div>
+      </div>
+      <div *ngIf="selectedrule=='Time Based'">
+          <div class="row mb-5">
+              <div class="col-lg-3">
+                  <h5 class="box-title">Time based Rules</h5>
+              </div>
+              <div class="col-lg-3">
+              </div>
+              <div class="col-lg-6">
+
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 mb-4">
+                    <div class="form-group ruleName">
+                        <label for="exampleInputEmail1">Rule Name</label>
+                        <input #rulename="ngModel" aria-describedby="emailHelp" class="form-control" id="" [(ngModel)]="timedata.name" type="text" required>
+                    </div>
+                    <div class="text-danger" *ngIf="rulename.touched && rulename.invalid" style="font-size: 80%; margin-top: 0.25rem; ">
+                            Rule name is required
+                    </div>
+                  <!-- <input class="form-control name" id="inputZip" [(ngModel)]="timedata.name" placeholder="Rule Name" type="text"> -->
+              </div>
+          </div>
+
+          <div class="row">
+
+              <div class="col-lg-3 mt-5">
+                  <label for="inputZip">Attribute &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Tooltip on the top"></i></span></label>
+                  <select class="form-control " [(ngModel)]="timedata.attribute.key">
+                        <option value="">Select an attribute</option>
+                      <option selected *ngFor="let o of attribute"
+                      >{{o.key}}</option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Time (from)</label>
+                      <ngb-timepicker [(ngModel)]="time" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">To</label>
+                      <ngb-timepicker [(ngModel)]="time2" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                  </div>
+              </div>
+              <div class="col-lg-3 mt-5">
+                  <label for="inputZip">Rule &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Select An Action"></i></span></label>
+                  <select class="form-control " [(ngModel)]="timedata.rule">
+                        <option value="">Select a rule</option>
+                      <option  *ngFor="let i of rules" value="{{i.value}}">{{i.rule}}</option>
+                  </select>
+              </div>
+          </div>
+
+          <div class="row mt-3 ml-4">
+              <div class="col-md-6">
+                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="specific($event)">
+                  <label class="form-check-label" for="defaultCheck1" placement="top" ngbTooltip="Tooltip on the top">
+                      More Options &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Tooltip on the top"></i></span>
+                  </label>
+              </div>
+          </div>
+
+          <div *ngIf="specificdate ==='show'">
+              <div class="row mt-3">
+                  <div class="col-lg-4" *ngFor="let i of days">
+                      <div class="check-list">
+                          <label class="checkbox">
+                              <input type="checkbox"  name="{{i.name}}"
+                              value="{{i.number}}"
+                              (change)="changedays($event, i.number)">
+                              <span>{{i.name}}</span>
+                          </label>
+                      </div>
+                  </div>
+              </div>
+              <br>
+              <div class="row">
+                  <div class="col-lg-4" *ngFor="let i of months">
+                      <div class="check-list">
+                          <label class="checkbox">
+                          <input type="checkbox"  name="{{i.name}}"
+                          value="{{i.number}}"
+                          (change)="changemonths($event, i.number)">
+                          <span>{{i.name}}</span>
+                      </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div *ngIf="selectedrule=='Pattern Based'">`
+          <div>
+              <h5 class="box-title">Pattern Based Rules</h5>
+          </div>
+          <div class="row">
+              <div class="col-lg-2">
+                  <label for="inputZip">Attribute</label>
+                  <select class="form-control " [(ngModel)]="patternerdata.attribute.key">
+                        <option selected *ngFor="let o of attribute" value={{o.key}}>{{o.key}}</option>
+                    </select>
+              </div>
+              <div class="col-lg-2">
+                  <label for="inputZip">Condition</label>
+                  <select class="form-control " [(ngModel)]="patternerdata.condition">
+                    <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">Range (from)</label>
+                      <input class="form-control" [(ngModel)]="patternerdata.from" id="inputZip" type="text">
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">To</label>
+                      <input class="form-control" [(ngModel)]="patternerdata.to" id="inputZip" type="text">
+                  </div>
+              </div>
+              <div class="col-lg-2">
+                  <label for="inputZip">Rule</label>
+                  <select class="form-control " [(ngModel)]="patternerdata.rule">
+                        <option *ngFor="let i of rules" value="{{i.value}}">{{i.rule}}</option>
+                      </select>
+              </div>
+          </div>
+      </div>
+
+      <div *ngIf="selectedrule=='Combined Rule'">
+
+          <div class="row mb-3">
+              <div class="col-lg-3">
+                  <h5 class="box-title">Combined Rule</h5>
+              </div>
+              <div class="col-lg-3">
+              </div>
+              <div class="col-lg-6">
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="col-lg-6">
+                  <input class="form-control name" id="inputZip" [(ngModel)]="combinedname" placeholder="Rule Name" type="text">
+              </div>
+          </div>
+
+          <div class="row mb-3 mt-3">
+              <div class="col-md-3">
+                  <label for="" placement="top" ngbTooltip="Tooltip on the top">Rule Type</label>
+              </div>
+              <div class="col-md-3 ">
+                  <select class="form-control" [(ngModel)]="selectedOption" name="first">
+                        <!-- <option value="">Select a rule type</option> -->
+
+                      <option
+                          selected="selected"
+                          *ngFor="let o of options"
+                      >{{o.name}}</option>
+                  </select>
+              </div>
+          </div>
+          <br>
+
+          <div class="row" *ngIf="selectedOption ==='basic'">
+              <div class="col-lg-3 mt-3">
+                  <label for="" placement="top" ngbTooltip="Tooltip on the top">Condition</label>
+              </div>
+              <div class="col-lg-3">
+                  <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Attribute</label>
+                  <select class="form-control " [(ngModel)]="basicdata.attribute.keylevel" (change)="onChange($event, 1)">
+                        <option value="">Select an attribute</option>
+
+                      <option selected *ngFor="let o of attribute"
+                      [value]="o.keylevel"><span *ngIf="o.keylevel !== ''">({{o.keylevel}})</span>{{o.key}}</option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Condition</label>
+                  <select class="form-control " [(ngModel)]="basicdata.condition">
+                        <option value="">Select a condition</option>
+
+                      <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" *ngIf="objectselected1 !== 'paymentMethod1'">
+                      <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="basicdata.value" type="text">
+                  </div>
+                  <div class="form-group" *ngIf="objectselected1 === 'paymentMethod1'">
+                      <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                      <select class="form-control" [(ngModel)]="basicdata.value">
+                          <option value = "">select option</option>
+                          <option value = "wallet">Wallet</option>
+                          <option value = "bankcard">Bank Card</option>
+                          <option value = "mobilemoney">Mobile Money</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+
+          <div class="row" *ngIf="selectedOption ==='weighted'">
+              <div class="col-lg-3 mt-4">
+                  <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Condition</label>
+              </div>
+
+              <div class="col-lg-3">
+                  <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Attribute</label>
+                  <select class="form-control " [(ngModel)]="weighteddata.attribute.key">
+                        <option value="">Select an attribute</option>
+
+                      <option selected *ngFor="let o of attribute">
+                         {{o.key}}
+                      </option>
+                  </select>
+              </div>
+
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">Range (from)</label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="weighteddata.from" type="text">
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">To</label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="weighteddata.to" type="text">
+                  </div>
+              </div>
+          </div>
+
+          <div *ngIf="selectedOption ==='time'">
+              <div class="row">
+                  <div class="col-lg-3 mt-5">
+                      <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Condition</label>
+                  </div>
+                  <div class="col-lg-3 mt-5">
+                      <label for="inputZip" placement="top" ngbTooltip="Tooltip on the top">Attribute</label>
+                      <select class="form-control " [(ngModel)]="timedata.attribute.key">
+                        <option value="">Select an attribute</option>
+
+                          <option selected *ngFor="let o of attribute"
+                          value={{o.key}} >{{o.key}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">Time (from)</label>
+                          <ngb-timepicker [(ngModel)]="time" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">To</label>
+                          <ngb-timepicker [(ngModel)]="time2" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                      </div>
+                  </div>
+              </div>
+              <div class="row mt-3 ml-4">
+                  <div class="col-md-6">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="specific($event)">
+                      <label class="form-check-label" for="defaultCheck1">
+                          More Options
+                      </label>
+                  </div>
+              </div>
+              <div *ngIf="specificdate ==='show'" class="mt-3">
+                  <div class="row">
+                      <div class="col-lg-4" *ngFor="let i of days">
+                          <div class="check-list">
+                              <label class="checkbox">
+                                  <input type="checkbox"  name="{{i.name}}"
+                                  value="{{i.number}}"
+                                  (change)="changedays($event, i.number)">
+                                  <span>{{i.name}}</span>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <div class="col-lg-4" *ngFor="let i of months">
+                          <div class="check-list">
+                              <label class="checkbox">
+                                  <input type="checkbox"  name="{{i.name}}"
+                                  value="{{i.number}}"
+                                  (change)="changemonths($event, i.number)">
+                                  <span>{{i.name}}</span>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br>
+          </div>
+          <div class="row" *ngIf="selectedOption ==='pattern'">
+              <div class="col-lg-3 mt-4">
+                  <label for="inputZip">Condition</label>
+              </div>
+              <div class="row">
+                  <div class="col-lg-2">
+                      <label for="inputZip">Attribute</label>
+                      <select class="form-control " [(ngModel)]="patternerdata.attribute.key">
+                          <option selected *ngFor="let o of attribute" value={{o.key}}>{{o.key}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-2">
+                      <label for="inputZip">Condition</label>
+                      <select class="form-control " [(ngModel)]="patternerdata.condition">
+                                    <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                                  </select>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">Range (from)</label>
+                          <input class="form-control" [(ngModel)]="patternerdata.from" id="inputZip" type="text">
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">To</label>
+                          <input class="form-control" [(ngModel)]="patternerdata.to" id="inputZip" type="text">
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <hr>
+          <div class="row">
+              <div class="col-md-3">
+                  <label for="">Operator</label>
+              </div>
+              <div class="col-md-3">
+                  <select class="form-control " name="first" [(ngModel)]="operater">
+                      <option selected="selected" value="and">AND</option>
+                      <option selected="selected" value="or">OR</option>
+                  </select>
+              </div>
+          </div>
+
+          <br>
+
+          <div class="row mb-3">
+              <div class="col-md-3">
+                  <label for="" placement="top" ngbTooltip="Tooltip on the top">Rule Type</label>
+              </div>
+              <div class="col-md-3">
+                  <select class="form-control " [(ngModel)]="secondOption" name="second">
+                        <!-- <option value="" selected>Select a rule type</option> -->
+
+                      <option
+                         
+                          *ngFor="let i of options"
+                      [value]="i.name">{{i.name}}</option>
+                  </select>
+              </div>
+          </div>
+          <br>
+          <div class="row" *ngIf="secondOption ==='basic'">
+              <div class="col-lg-3 mt-4">
+                  <label for="">Condition</label>
+              </div>
+              <div class="col-lg-3">
+                  <label for="inputZip">Attribute</label>
+                  <select class="form-control " [(ngModel)]="basicdatacombined.attribute.keylevel" (change)="onChange($event,2)">
+                        <option value="">Select an attribute</option>
+                      <option selected *ngFor="let o of attribute"
+                      [value]="o.keylevel"><span *ngIf="o.keylevel !== ''">({{o.keylevel}})</span>{{o.key}}</option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <label for="inputZip">Condition</label>
+                  <select class="form-control " [(ngModel)]="basicdatacombined.condition">
+                        <option value="">Select a condition</option>
+
+                      <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group" *ngIf="objectselected2 !== 'paymentMethod2'">
+                      <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="basicdatacombined.value" type="text">
+                  </div>
+                  <div class="form-group" *ngIf="objectselected2 === 'paymentMethod2'">
+                      <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                      <select class="form-control" [(ngModel)]="basicdatacombined.value">
+                          <option value = "">select option</option>
+                          <option value = "wallet">Wallet</option>
+                          <option value = "bankcard">Bank Card</option>
+                          <option value = "mobilemoney">Mobile Money</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <div class="row" *ngIf="secondOption ==='weighted'">
+              <div class="col-lg-3 mt-3">
+                  <label for="inputZip">Condition</label>
+              </div>
+              <div class="col-lg-3">
+                  <label for="inputZip">Attribute</label>
+                  <select class="form-control " [(ngModel)]="weighteddatacombined.attribute.key">
+                        <option value="">Select an attribute</option>
+                        <option selected *ngFor="let o of attribute">
+                        {{o.key}}
+                        </option>
+                  </select>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">Range (from)</label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="weighteddatacombined.from" type="text">
+                  </div>
+              </div>
+              <div class="col-lg-3">
+                  <div class="form-group">
+                      <label for="inputZip">To</label>
+                      <input class="form-control" id="inputZip" [(ngModel)]="weighteddatacombined.to" type="text">
+                  </div>
+              </div>
+              <br>
+          </div>
+          <div *ngIf="secondOption ==='time'">
+              <div class="row">
+                  <div class="col-lg-3 mt-5">
+                      <label for="inputZip">Condition</label>
+                  </div>
+                  <div class="col-lg-3 mt-5">
+                      <label for="inputZip">Attribute</label>
+                      <select class="form-control " [(ngModel)]="timedatacombined.attribute.key">
+                          <option value="">Select an attribute</option>
+                          <option selected *ngFor="let o of attribute"
+                          value={{o.key}} >{{o.key}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">Time (from)</label>
+                          <ngb-timepicker [(ngModel)]="time1" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">To</label>
+                          <ngb-timepicker [(ngModel)]="time3" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                      </div>
+                  </div>
+              </div>
+              <div class="row mt-3 ml-4">
+                  <div class="col-md-6">
+                      <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="specific($event)">
+                      <label class="form-check-label" for="defaultCheck1">
+                          More Options
+                      </label>
+                  </div>
+              </div>
+              <div class="mt-3" *ngIf="specificdate === 'show'">
+                  <div class="row">
+                      <div class="col-lg-4" *ngFor="let i of days">
+                          <div class="check-list">
+                              <label class="checkbox">
+                                  <input type="checkbox"  name="{{i.name}}"
+                                  value="{{i.number}}"
+                                  (change)="changedays($event, i.number)">
+                                  <span>{{i.name}}</span>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <div class="col-lg-4" *ngFor="let i of months">
+                          <div class="check-list">
+                              <label class="checkbox">
+                                  <input type="checkbox"  name="{{i.name}}"
+                                  value="{{i.number}}"
+                                  (change)="changemonths($event, i.number)">
+                                  <span>{{i.name}}</span>
+                              </label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <br>
+          </div>
+          <div class="row" *ngIf="secondOption ==='pattern'">
+              <div class="col-lg-3 mt-4">
+                  <label for="inputZip">Condition</label>
+              </div>
+              <div class="row">
+                  <div class="col-lg-2">
+                      <label for="inputZip">Attribute</label>
+                      <select class="form-control " [(ngModel)]="patternerdatacombined.attribute.key">
+                          <option selected *ngFor="let o of attribute" value={{o.key}}>{{o.key}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-2">
+                      <label for="inputZip">Condition</label>
+                      <select class="form-control " [(ngModel)]="patternerdatacombined.condition">
+                          <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">Range (from)</label>
+                          <input class="form-control" [(ngModel)]="patternerdatacombined.from" id="inputZip" type="text">
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">To</label>
+                          <input class="form-control" [(ngModel)]="patternerdatacombined.to" id="inputZip" type="text">
+                      </div>
+                  </div>
+                  <div class="col-lg-2">
+                      <label for="inputZip">Rule</label>
+                      <select class="form-control " [(ngModel)]="patternerdatacombined.rule">
+                          <option *ngFor="let i of rules" value="{{i.value}}">{{i.rule}}</option>
+                      </select>
+                  </div>
+              </div>
+          </div>
+          <hr>
+          <br>
+          <!-- <div class="row "> -->
+              <button class=" btn btn-primary ml-3 pull-right" (click)="addCondition()"><i class="ft ft-plus"></i> Add a condition</button>
+          <!-- </div> -->
+          <div *ngIf="addcondition === 'yes'">
+              <div class="row mt-5">
+                  <div class="col-md-3">
+                      <label for="">Operator</label>
+                  </div>
+                  <div class="col-md-3">
+                      <select class="form-control " [(ngModel)]="operater1">
+                      
+                      <option  value="and">AND</option>
+                      <option  value="or">OR</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6">
+
+                  </div>
+              </div>
+
+              <br>
+              <div class="row mb-3">
+                  <div class="col-md-3">
+                      <label for="">Rule Type</label>
+                  </div>
+                  <div class="col-md-3">
+                      <select class="form-control " [(ngModel)]="thirdoption" name="first">
+                        <!-- <option value="">Select a rule type</option> -->
+
+                          <option
+                              selected="selected"
+                              *ngFor="let i of options"
+                         >{{i.name}}
+                        </option>
+                      </select>
+                  </div>
+              </div>
+              <div class="row" *ngIf="thirdoption ==='basic'">
+                  <div class="col-lg-3 mt-4">
+                      <label for="">Condition</label>
+                  </div>
+                  <div class="col-lg-3">
+                      <label for="inputZip">Attribute</label>
+                      <select class="form-control " [(ngModel)]="basicdatacombined1.attribute.keylevel" (change)="onChange($event,3)">
+                        <option value="">Select an attribute</option>
+                          <option selected *ngFor="let o of attribute"
+                          [value]="o.keylevel"><span *ngIf="o.keylevel !== ''">({{o.keylevel}})</span> {{o.key}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                      <label for="inputZip">Condition</label>
+                      <select class="form-control " [(ngModel)]="basicdatacombined1.condition">
+                        <option value="">Select a condition</option>
+
+                          <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                      </select>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group" *ngIf="objectselected3 !== 'paymentMethod3'">
+                          <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                          <input class="form-control" id="inputZip" [(ngModel)]="basicdatacombined1.value" type="text">
+                      </div>
+                      <div class="form-group" *ngIf="objectselected3 === 'paymentMethod3'">
+                          <label for="inputZip">Value  &nbsp;<span><i class="ti-help-alt" placement="top" ngbTooltip="Insert a value"></i></span></label>
+                          <select class="form-control" [(ngModel)]="basicdatacombined1.value">
+                              <option value = "">select option</option>
+                              <option value = "wallet">Wallet</option>
+                              <option value = "bankcard">Bank Card</option>
+                              <option value = "mobilemoney">Mobile Money</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row mt-3" *ngIf="thirdoption ==='weighted'">
+                  <div class="col-lg-3 mt-4">
+                      <label for="inputZip">Condition</label>
+                  </div>
+                  <div class="col-lg-3">
+                      <label for="inputZip">Attribute</label>
+                      <select class="form-control " [(ngModel)]="weighteddatacombined1.attribute.key">
+                        <option value="">Select an attribute</option>
+
+                          <option selected *ngFor="let o of attribute">
+                            {{o.key}}
+                          </option>
+                      </select>
+                  </div>
+
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">Range (from)</label>
+                          <input class="form-control" id="inputZip" [(ngModel)]="weighteddatacombined1.from" type="text">
+                      </div>
+                  </div>
+                  <div class="col-lg-3">
+                      <div class="form-group">
+                          <label for="inputZip">To</label>
+                          <input class="form-control" id="inputZip" [(ngModel)]="weighteddatacombined1.to" type="text">
+                      </div>
+                  </div>
+                  <br>
+              </div>
+
+              <div *ngIf="thirdoption ==='time'">
+                  <div class="row mt-3 mt-5">
+                      <div class="col-lg-3 mt-5">
+                          <label for="inputZip">Condition</label>
+                      </div>
+                      <div class="col-lg-3 mt-5">
+                          <label for="inputZip">Attribute</label>
+                          <select class="form-control " [(ngModel)]="timedatacombined1.attribute.key">
+                            <option value="">Select attribute</option>
+                              <option selected *ngFor="let o of attribute"
+                              value={{o.key}} >{{o.key}}</option>
+                          </select>
+                      </div>
+
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputZip">Time (from)</label>
+                              <ngb-timepicker [(ngModel)]="time4" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputZip">To</label>
+                              <ngb-timepicker [(ngModel)]="time5" [meridian]="meridian" [spinners]="spinners"></ngb-timepicker>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row mt-3 ml-4">
+                      <div class="col-md-6">
+                          <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" (change)="specific($event)">
+                          <label class="form-check-label" for="defaultCheck1">
+                                  More Options
+                              </label>
+                      </div>
+                  </div>
+                  <div *ngIf="specificdate === 'show'">
+                      <div class="row mt-3">
+                          <div class="col-lg-4" *ngFor="let i of days">
+                              <div class="check-list">
+                                  <label class="checkbox">
+                                      <input type="checkbox"  name="{{i.name}}"
+                                          value="{{i.number}}"
+                                          (change)="changedays($event, i.number)">
+                                          <span>{{i.name}}</span>
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col-lg-4" *ngFor="let i of months">
+                              <div class="check-list">
+                                  <label class="checkbox">
+                                      <input type="checkbox"  name="{{i.name}}"
+                                      value="{{i.number}}"
+                                      (change)="changemonths($event, i.number)">
+                                      <span>{{i.name}}</span>
+                                  </label>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                <br>
+              </div>
+              <div class="row" *ngIf="thirdoption ==='pattern'">
+                  <div class="col-lg-3 mt-4">
+                      <label for="inputZip">Condition</label>
+                  </div>
+                  <div class="row">
+                      <div class="col-lg-2">
+                          <label for="inputZip">Attribute</label>
+                          <select class="form-control " [(ngModel)]="patternerdatacombined1.attribute.key">
+                              <option selected *ngFor="let o of attribute" value={{o.key}}>{{o.key}}</option>
+                          </select>
+                      </div>
+                      <div class="col-lg-2">
+                          <label for="inputZip">Condition</label>
+                          <select class="form-control " [(ngModel)]="patternerdatacombined1.condition">
+                                  <option  *ngFor="let i of condtions" value="{{i.value}}">{{i.name}}</option>
+                              </select>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputZip">Range (from)</label>
+                              <input class="form-control" [(ngModel)]="patternerdatacombined1.from" id="inputZip" type="text">
+                          </div>
+                      </div>
+                      <div class="col-lg-3">
+                          <div class="form-group">
+                              <label for="inputZip">To</label>
+                              <input class="form-control" [(ngModel)]="patternerdatacombined1.to" id="inputZip" type="text">
+                          </div>
+                      </div>
+                      <div class="col-lg-2">
+                          <label for="inputZip">Rule</label>
+                          <select class="form-control " [(ngModel)]="patternerdatacombined1.rule">
+                              <option *ngFor="let i of rules" value="{{i.value}}">{{i.rule}}</option>
+                          </select>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <br>
+          <div class="row mt-5">
+              <div class="col-md-3">
+                  <label for="">Rule</label>
+              </div>
+              <div class="col-md-3">
+                  <div class="form-group">
+                        <select class="form-control" [(ngModel)]="combinedrule"  type="text" name="rule">
+                            <!-- <option value = "">Select Rule</option> -->
+                            <!-- <option value = "pass">Pass</option> -->
+                            <option value = "hold">Hold</option>
+                            <option value = "block">Block</option>
+                            <!-- <option *ngFor="let i of rules " value="{{i.value}}">{{i.rule}}</option> -->
+                        </select>
+                  </div>
+                
+              </div>
+              <div class="col-md-6">
+
+              </div>   
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-9">
+          </div>
+          <div class="col-md-3">
+              <button class="btn btn-primary pull-right mt-3 " (click)="savemethod()"><i class="ft ft-check"></i>&nbsp;Save</button>
+          </div>
+      </div>
+
+  </div>
+  <ng-template #LoginModal let-modal>
+      <app-modal></app-modal>
+  </ng-template>

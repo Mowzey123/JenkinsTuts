@@ -1,0 +1,18 @@
+.card-design{
+
+    height: 200px;
+}
+
+.card-design2{
+    border-style: dashed !important; 
+    border-color: #c7c7c7;border-radius: 5px;
+    height: 200px;
+}
+
+.h6 {
+ padding-top: 12%;
+}
+
+.card-footer{
+    background-color: #fff !important;
+}

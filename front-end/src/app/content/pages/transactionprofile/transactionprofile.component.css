@@ -1,0 +1,80 @@
+.tasks-list>li {
+    padding-right: 0;
+    padding-left: 0;
+    padding: .8rem 1.5rem;
+}
+
+.task-actions {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -15px;
+}
+
+.task-actions>a.dropdown-toggle {
+    color: #aaa;
+    height: 30px;
+    width: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-info {
+    padding-left: 34px;
+}
+
+.tasks-list>li .checkbox input:checked~span {
+    text-decoration: line-through;
+}
+
+.tasks-list>li:hover .task-actions {
+    display: block
+}
+/*
+.btn-primary {
+    background-color: red !important;
+    border-color: red;
+} */
+
+.btn-danger {
+    color: white !important;
+    background-color: red !important;
+    background-image: none;
+    border-color: red !important;
+}
+
+.btn-outline-danger:hover {
+    color: white !important;
+    background-color: red;
+    border-color: red;
+}
+
+.data-widget-icon {
+    font-size: 18px;
+}
+
+.data-widget-icons {
+  /* position: absolute !important; */
+
+  font-size: 80px !important;
+
+}
+
+.text-primary{
+  color:#2949EF !important;
+}
+
+.page-link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.3rem;
+    padding: 0 0.8rem;
+    margin: 0 3px;
+    color: #2949EF;
+    background-color: #fff;
+    border-radius: 0.25rem;
+}

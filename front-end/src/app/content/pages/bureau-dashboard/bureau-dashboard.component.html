@@ -1,0 +1,175 @@
+<subheader title="Bureau Dashboard"></subheader>
+
+<div>
+        <div>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3 font-15 text-muted font-weight-normal">RECORDS TODAY</h6>
+                                <div class="h2 mb-0 font-weight-normal">{{recordstoday}}</div><i class="ft-shopping-cart data-widget-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <a  style="cursor: pointer !important; padding: 0px !important" (click)="totalRecords()">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="mb-3 font-15 text-muted font-weight-normal">TOTAL RECORDS</h6>
+                                    <div class="h2 mb-0 font-weight-normal">{{totalrecords}}</div><i class="ft-database data-widget-icon"></i>
+                                </div>
+                            </div>
+                        </a>    
+                    </div>
+                    <div class="col-3">
+                        <a  style="cursor: pointer !important; padding: 0px !important" (click)="blockedAccounts()"> 
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h6 class="mb-3 font-15 text-muted font-weight-normal">BLOCKED ACCOUNTS</h6>
+                                    <div class="h2 mb-0 font-weight-normal">{{blockedaccs}}</div><i class="ft-user data-widget-icon"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="mb-3 font-15 text-muted font-weight-normal">MONTHS SEARCHES</h6>
+                                <div class="h2 mb-0 font-weight-normal">{{searchcount}}</div><i class="ft-activity data-widget-icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="box-title">Record</h5>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div>
+                                            <div style="height: 168px">
+                                                    <canvas baseChart height="168px" 
+                                                        [data]="doughnutChart.data"
+                                                        [labels]="doughnutChart.labels"
+                                                        [chartType]="doughnutChart.type"
+                                                        [legend]="doughnutChart.legend"
+                                                        [colors]="doughnutChart.colors"
+                                                        [options]="doughnutChart.options"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       
+                        </div>
+                        <div class="card" style="max-height: 300 !important; min-height: 300px !important;">
+                                <div class="card-body">
+                                    <h5 class="box-title">Rates</h5>
+                                    <div>
+                                        <div class="h6">Payment Fraud</div>
+                                        <div class="media align-items-center mb-4">
+                                            <div class="media-body">
+                                                <div class="progress" style="height: 10px; box-shadow: 0 4px 4px rgba(0,0,0,.08);">
+                                                    <div class="progress-bar " role="progressbar" [style.width]="paymentFraudwidth" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div><span class="h5 mb-0 ml-4">{{paymentFraudwidth}}</span>
+                                        </div>
+                                        <div class="h6 mt-5">Product Fraud</div>
+                                        <div class="media align-items-center mb-4">
+                                            <div class="media-body">
+                                                <div class="progress" style="height: 10px; box-shadow: 0 4px 4px rgba(0,0,0,.08);">
+                                                    <div class="progress-bar bg-danger" role="progressbar"[style.width]="productFraudwidth" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div><span class="h5 mb-0 ml-4">{{productFraudwidth}}</span>
+                                        </div>
+                              
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                   <div class="col-lg-6">
+                        <div class="card card-fullheight" style="max-height: 500 !important; min-height: 500px !important;">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-5">
+                                        <div>
+                                            <h5 class="box-title mb-2">Record</h5>
+                                            <div class="text-muted font-13">Last 30 days</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <canvas baseChart height="450"
+                                                [datasets]="lineChart.data"
+                                                [labels]="lineChart.labels"
+                                                [options]="lineChart.options"
+                                                [colors]="lineChart.colors"
+                                                [chartType]="lineChart.type">
+                                            </canvas>
+                                    </div>
+                                    <!-- <div class="flexbox flex-wrap mt-5">
+                                        <div class="d-flex mb-4 mb-sm-0">
+                                            <div class="pr-4 pr-sm-5">
+                                                <h6 class="mb-2 font-15 text-muted">Total Orders</h6>
+                                                <div class="h4 mb-0 text-primary">+24.50%</div>
+                                            </div>
+                                            <div class="pl-0 pl-sm-5">
+                                                <h6 class="mb-2 font-15 text-muted">Total Income</h6>
+                                                <div class="h4 mb-0 text-danger">+$625.50</div>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                   </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card card-fullheight">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between mb-4">
+                                        <div>
+                                            <h5 class="box-title mb-2">Newest Records</h5>
+                                            <!-- <div class="text-muted font-13">Simple Subtitle</div> -->
+                                        </div>
+                                    </div>
+                                    <div class="card-fullwidth-block">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-striped">
+                                                <thead class="thead-default thead-lg">
+                                                    <tr>
+                                                        <th  class="pl-4">Date Added</th>
+                                                        <!-- <th>Time</th> -->
+                                                        <th>Account</th>
+                                                        <th>Product</th>
+                                                        <th>Amount</th>
+                                                        <th>Payment method</th>
+                                                        <th class="pr-4">Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let i of latestrecords">
+                                                        <td class="pr-4 pl-4" (click)="profile(i)">{{i.createdAt | date:'short'}}</td>
+
+                                                        <!-- <td  (click)="profile(i)">{{i.transactiondata.transactionDate | date: 'shortTime'}}</td> -->
+                                                        <td (click)="profile(i)">{{i.transactiondata.accountDetails.userId}}</td>                                                       
+                                                        <td (click)="profile(i)">{{i.transactiondata.productDetails.name}}</td>
+                                                        <td (click)="profile(i)"> {{numberWithCommas(i.transactiondata.amount.amount)}}</td>
+                                                        <td (click)="profile(i)">{{i.paymentmethod}}</td>
+                                                        <td  (click)="profile(i)">{{i.transactiondata.transactionDate | date:'short'}}</td>
+
+                                                        <!-- <td><i class="material-icons text-success">check</i></td> -->
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+</div>

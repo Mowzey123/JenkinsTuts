@@ -1,0 +1,34 @@
+.table th, .table td {
+    cursor: pointer;
+}
+
+#preselection {
+    max-width: 60%;
+  }
+
+  .truncate {
+    color: #2949EF !important;
+    width: 110px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: #2949EF !important;
+  }
+
+  img, canvas {
+    max-width: 8%;
+}
+
+
+.shake {
+  /* animation-duration: 6s !important;
+  animation-delay: 2s !important; */
+  width: 80px !important;
+  animation-iteration-count: infinite;
+}

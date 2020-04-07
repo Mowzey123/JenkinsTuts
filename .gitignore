@@ -1,0 +1,8 @@
+node_modules/
+build/
+.vscode/
+.env
+.env.production
+/.env
+/.env.production
+secretes/

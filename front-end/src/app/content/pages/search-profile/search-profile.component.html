@@ -1,0 +1,82 @@
+
+<div class="row">
+        <div class="col-md-9">
+                <subheader title='Search  Profile'></subheader>
+        
+        </div>
+        
+        <div class="col-md-3">
+                <button class="btn btn-primary mr-2" type="submit" [routerLink]="['/Rac/Fraudsearch']"><i class="ft-plus pr-2"></i>New Search</button>
+                <button class="btn btn-light" [routerLink]="['/Rac/Fraudsearch']" ><i class="ft-x text-danger pr-2"></i>Close</button>
+        
+        </div>
+</div>
+
+<div class="card">
+    <div class="card-body invoice">
+            <div class="row mb-4 col-lg-6">
+                    <div class="col">
+                            <div class="media p-4 bg-danger text-white" style="background-color: #e3e3f2; border-radius: 8px"><i class="ti-archive align-self-center mr-4 font-30"></i>
+                                <div class="media-body">
+                                    <h6 class="mb-0x font-weight-bold">Fraud records</h6>
+                                    <div class="text-mutedx font-13">Total {{data?.transactions?.length}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col">
+                        <div class="media p-4 align-items-center" style="background-color: #e3e3f2; border-radius: 8px"><i class="ti-money  align-self-center mr-4 font-30"></i>
+                            <div class="media-body">
+                                <h6 class="mb-0x font-weight-bold">Fraud Amount</h6>
+                                <div class="text-muted font-13">Total {{numberWithCommas(sum)}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+        <div class="d-flex justify-content-between mb-4">
+            <div>
+                <h5 class="box-title mb-2">Fraud Details</h5>
+            </div>
+        </div>
+       
+        <div class="card-fullwidth-block mx-sm-0">
+            <div class="table-responsive">
+                <table class="table invoice-table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Date</th>
+                            <th>Account</th>
+                            <th>Product</th>
+                            <th>Amount</th>
+                            <th>Payment Method</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let i of resultdata">
+                        <tr>
+                            <td>{{i.transactiondata.transactionDate | date}}</td>
+                            <td>{{i.transactiondata.accountDetails.userId}}</td>
+                            <td>{{i.transactiondata.productDetails.name}}</td>
+                            <td>{{numberWithCommas(i.transactiondata.amount.amount)}}</td>
+                            <td>{{i.transactiondata.paymentMethod.name}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="5"></th>
+                        </tr>
+                    </tfoot>
+                </table>
+              
+            </div>
+                    <div class="mt-4 pb-3">
+                            <h5 class="box-title mb-2">Confidence Level</h5>
+                        </div>
+                <p><ngb-progressbar type="danger" [showValue]="true" [value]="confidencelevel" [striped]="true"></ngb-progressbar></p>
+                <p class="pt-3"><strong>Result</strong>:&nbsp;{{data?.computations?.result}}</p>
+        </div>
+    </div>
+</div>
+
+<ng-template #LoginModal let-modal>
+    <app-modal ></app-modal>
+  </ng-template>

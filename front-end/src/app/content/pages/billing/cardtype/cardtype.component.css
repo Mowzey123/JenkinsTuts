@@ -1,0 +1,16 @@
+.card-footer{
+    background-color: #fff !important;
+}
+
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    background-color: #fff !important;
+}
+/* 
+::ng-deep .mat-input-wrapper{
+    width:600px !important;
+  } */
+
+  .mat-input-wrapper{
+    width:600px !important;
+  }

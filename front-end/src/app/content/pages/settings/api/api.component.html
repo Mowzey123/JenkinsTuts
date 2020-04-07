@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-9">
+        <subheader title='Risk API Key'></subheader>
+    </div>
+  </div>
+<div class="card">
+        <div class="card-header">
+            <span class="pull-left">Live API Key & Client Id</span>
+            <button class="pull-right" class="btn btn-danger" (click)="openBackDropCustomClass(content)"><i class="ft ft-repeat "></i>&nbsp;Generate new key</button>
+        </div>
+        <div class="card-body">
+            <span class="ml-3">Client Id</span>
+            <div class="col-md-8">
+                <div class="shadow-lg p-3 mb-5 bg-white rounded mt-4 "><span *ngIf="id">{{id}}</span><span *ngIf="!id">no data</span><span class="pull-right"><span class="font-13 text-muted">Copy</span>&nbsp; <i style="cursor: pointer;" class="ti-clipboard " (click)="copyText(id)"></i></span></div>
+            </div>
+            <span class="ml-3">API key&nbsp;<i class="ti-help-alt" placement="top" ngbTooltip="The api key is required during integration with FDP data collection api."></i></span>
+                <div class="col-md-8">
+                <div class="shadow-lg p-3 mb-5 bg-white rounded mt-4 ">{{apiKey}}<span class="pull-right"><span class="font-13 text-muted">Copy</span>&nbsp; <i style="cursor: pointer;" class="ti-clipboard " (click)="copyText(apiKey)"></i></span></div>
+              </div>
+        </div>
+        <div class="card-footer">
+                <div class="pull-right"><a class="btn btn-primary " style="color:white !important;"  href="http://riskapi.cognativeinsights.io/" target="_blank" ><i class="ft ft-check"></i>&nbsp;Getting Started</a></div>
+        </div>
+    </div>
+<ng-template #content let-modal>
+  
+    <div class="modal-body mt-3 ml-3 mr-3">
+        <h5>Are you sure you want to generate a new API key? </h5>
+    </div>
+    <div class="modal-footer">
+            <fieldset class="w-100">
+                    <button class="btn btn-danger" (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;No</button>
+                    <button class="btn btn-success float-right"  (click)="openModal(generates)"><i class="ft ft-check"></i>&nbsp;Yes</button>
+            </fieldset>
+    </div>
+  
+</ng-template>
+
+<ng-template #generates let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Generate Key</h4>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+            <p>If you've integrated with the current keys, you'll be required to change to the newly generated keys.</p>
+    </div>
+    <div class="modal-footer">
+            <button type="button" class="btn btn-danger " (click)="generate()"><i class="ft ft-repeat "></i>&nbsp;Generate</button>
+    </div>
+
+</ng-template>
+
+<ng-template #LoginModal let-modal>
+  <app-modal ></app-modal>
+</ng-template>

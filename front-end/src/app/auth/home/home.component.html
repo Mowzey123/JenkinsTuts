@@ -1,0 +1,34 @@
+<div class=" auth-content mb-0 ">
+    <div class=" py-5 ">
+        <div class="text-center mb-5 ">
+                <div class="pb-3"><img  src="assets/img/CognativeLogo.png" alt="image " width="150 " /></div>
+
+            <div class="text-center ">
+                <h2 style="font-size: 45px !important; ">Let's get started</h2>
+            </div>
+        </div>
+        <!-- <form [formGroup]="signupForm" id="login-form " action="javascript:; " (ngSubmit)="signupForm.valid &&  register()"> -->
+        <form [formGroup]="signupForm" id="login-form" action="javascript:; " (ngSubmit)="signupForm.valid && register()">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" formControlName="email" placeholder="Email"  [ngClass]="{'is-invalid':signupForm.get('email').touched && signupForm.get('email').invalid}"   />
+              <div *ngIf="signupForm.get('email').touched && signupForm.get('email').invalid"  class="invalid-feedback">
+                <div *ngIf="!!signupForm.get('email').errors.required">Email is required</div>
+                <div *ngIf="!!signupForm.get('email').errors.email">Email must be a valid email Address</div>
+              </div>
+            </div>
+            <div class="form-group mb-4">
+                <label for="exampleInputPassword1">Password</label>
+                <input class="form-control" id="exampleInputPassword1" type="password" class="form-control" placeholder="Password" formControlName="password" [ngClass]="{'is-invalid':signupForm.get('password').touched && signupForm.get('password').invalid}" placement="left" ngbTooltip="Special Characters are not allowed" tooltipClass="my-custom-class"/>
+                <div *ngIf="signupForm.get('password').touched && signupForm.get('password').invalid" class="invalid-feedback">
+                    <div *ngIf="signupForm.get('password').errors['required']">Password is required</div>
+                    <div *ngIf="signupForm.get('password').errors['minlength']">Password must be a letaset 6 charector</div>
+                </div>
+            <p class="text-danger" *ngIf="errormesg !=''">{{errormesg}}</p>
+
+            </div>
+            <a> <button class="btn btn-primary btn-rounded btn-block" type="submit">NEXT</button></a>
+            <div class="text-muted text-center font-13 mt-5">Have a cognative account?<a class="ml-2" routerLink="Register" (click)="login()">Login</a></div>
+        </form>
+    </div>
+</div>

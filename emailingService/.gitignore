@@ -1,0 +1,7 @@
+/node_modules
+.npmignore
+npm-debug.log*
+/build/*
+/types/*
+.ts-node*
+.ts-node-*

@@ -1,0 +1,77 @@
+<div class="card auth-content mb-0" >
+    <div class="card-body py-5">
+        <div class="text-center pb-4">
+            <!-- <div class="pb-3"><img  src="assets/img/CognativeLogo.png" alt="image " width="150" /></div> -->
+            <!-- <div class="mb-4"><img  src="assets/img/cogrisk.jpg " alt="image " style="max-width: 20% !important" /> </div> -->
+            <!-- <h3 class="mb-3 text-primary">Fraud Detection Portal</h3> -->
+            <div class="font-18 text-center">Login to Your account</div>
+        </div>
+        <alert *ngIf="errormesg" type="danger" [dismissible]="dismissible" (onClosed)="onClosed($event)" style="color: #721c24 !important;">
+            {{errormesg}}
+         </alert>
+        <form [formGroup]="loginForm" id="login-form" action="javascript:;" (ngSubmit)="login()">
+            <div class="mb-4">
+                <div class="input-group-icon input-group-icon-left">
+                    <span class="input-icon input-icon-left"><i class="ti-email"></i></span>
+
+                    <input class="form-control" type="email" name="email" placeholder="Email Address" formControlName="email">
+
+                </div>
+                <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="invalid-feedbackr">
+                    <div *ngIf="loginForm.controls['email'].errors.required" style="font-size: 80%; margin-top: 0.25rem;">
+                        Email is required.
+                    </div>
+                    <div *ngIf="loginForm.controls['email'].errors.email" style="font-size: 80%; margin-top: 0.25rem;">
+                        Email must be a valid email address
+                    </div>
+                </div>
+
+                <div class="input-group-icon input-group-icon-left mt-4">
+                    <span class="input-icon input-icon-left"><i class="ti-lock"></i></span>
+                    <input class="form-control" type="password" autocomplete="password" name="password" placeholder="Password" formControlName="password">
+                </div>
+                <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="invalid-feedbackr">
+                    <div *ngIf="loginForm.controls['password'].errors.required" style="font-size: 80%; margin-top: 0.25rem;">
+                        Password is required.
+                    </div>
+                    <div *ngIf="loginForm.controls['password'].errors.minlength" style="font-size: 80%; margin-top: 0.25rem;">
+                        Password must be at least 6 characters
+                    </div>
+                </div>
+            </div>
+          
+            <!-- <p *ngIf="errormesg !==''" class="invalid-feedbackr" style="font-size: 80%; margin-top: 0.25rem;">{{errormesg}}</p> -->
+
+            <div class="flexbox mb-4">
+                <label>
+                    <span class="ml-0"></span><a style = "color:#2949EF !important" (click)="openBackDropCustomClass(password)">Forgot password?</a>
+                </label>
+            </div>
+            <button class="btn btn-primary btn-rounded btn-block" [disabled]="loginForm.invalid" type="submit">LOGIN</button>
+        </form>
+        <!-- <div class="text-muted text-center font-13 mt-5">Don't have a Cognative  account?<a class="ml-2" routerLink="Register" style="color:#2949EF !important" (click)="signup()">Create account</a></div> -->
+    </div>
+
+</div>
+
+
+
+<ng-template #password let-modal>
+        <div class="modal-body">
+            <div class="text-center"><span class="auth-head-icon text-primary"><i class="la la-key"></i></span></div>
+            <div class="card-body pt-1">
+                <h4 class="text-center mb-4">Reset Password</h4>
+                <p class="mb-4 text-center">Enter your email address below and we'll send you password reset instructions.</p>
+                <alert *ngIf="msg" type="danger" [dismissible]="dismissible" (onClosed)="onClosed1($event)" style="color: #721c24 !important;">
+                    {{msg}}
+                 </alert>
+            <form [formGroup]="forgotForm" id="login-form" action="javascript:;" (ngSubmit)="resetPassword()">
+                    <div class="input-group-icon input-group-icon-left">
+                            <span class="input-icon input-icon-left"><i class="ti-email"></i></span>
+                            <input class="form-control" type="email" name="email2" placeholder="Email" formControlName="email2">
+                        </div>
+                    <button class="btn btn-primary btn-rounded btn-block mt-4">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+</ng-template>

@@ -1,0 +1,37 @@
+.btn-danger {
+    background-color: red !important;
+}
+
+.shake {
+    animation-duration: 6s !important;
+    animation-delay: 2s !important;
+    width: 80px !important;
+    animation-iteration-count: infinite;
+}
+
+img[_ngcontent-c10] {
+    max-width: 100% !important;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    /* border-bottom: 1px solid #dee2e6 !important; */
+    border-top: 1px solid #dee2e6 !important;
+    font-weight: 600;
+}
+
+
+.table tbody {
+    vertical-align: bottom;
+    /* border-bottom: 1px solid #dee2e6 !important; */
+  }
+
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: rgb(51, 0, 218);
+    background-color:#fff !important;
+    border-color:#fff !important;
+}
+
+

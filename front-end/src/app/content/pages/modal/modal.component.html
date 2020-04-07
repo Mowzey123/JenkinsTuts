@@ -1,0 +1,41 @@
+
+  <div class="modal-header">
+      <h4 class="modal-title text-dark">You have been timed out</h4>
+  </div>
+  <div class="modal-body">
+      <form [formGroup]="loginForm" id="login-form" action="javascript:;" (ngSubmit)="login()">
+            <div class="mb-4">
+                    <div class="input-group-icon input-group-icon-left">
+                        <span class="input-icon input-icon-left"><i class="ti-email"></i></span>
+                        <input class="form-control" type="email" name="email" placeholder="Email" formControlName="email" [attr.disabled]="true">
+                    </div>
+                    <div *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)" class="invalid-feedbackr">
+                        <div class="text-danger" *ngIf="loginForm.controls['email'].errors.required" style="font-size: 80%; margin-top: 0.25rem;">
+                            Email is required.
+                        </div>
+                        <div class="text-danger" *ngIf="loginForm.controls['email'].errors.email" style="font-size: 80%; margin-top: 0.25rem;">
+                            Email must be a valid email address
+                        </div>
+                    </div>
+    
+                    <div class="input-group-icon input-group-icon-left mt-4">
+                        <span class="input-icon input-icon-left"><i class="ti-lock"></i></span>
+                        <input class="form-control" type="password" name="password" placeholder="Password" formControlName="password">
+                    </div>
+                    <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)" class="invalid-feedbackr">
+                        <div class="text-danger" *ngIf="loginForm.controls['password'].errors.required" style="font-size: 80%; margin-top: 0.25rem;">
+                            Password is required.
+                        </div>
+                        <div class="text-danger" *ngIf="loginForm.controls['password'].errors.minlength" style="font-size: 80%; margin-top: 0.25rem;">
+                            Password must be at least 6 characters
+                        </div>
+                    </div>
+                </div>
+    
+        
+          <p *ngIf="errormesg!=''" class="invalid-feedbackr text-danger" ><span style="font-size: 80%; margin-top: 0.25rem;">{{errormesg}}</span></p>
+          <button class="btn btn-primary btn-rounded btn-block mb-3" type="submit">Continue</button>
+      </form>
+  </div>
+
+

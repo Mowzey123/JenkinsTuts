@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-md-9">
+        <h5 class=""> Devices Blacklist</h5>
+        <small class="text-muted">Devices not allowed to carryout transactions.</small>
+    </div>
+    <div class="col-md-3"><button class="btn btn-danger pull-right" (click)="openBackDropCustomClass(content)"><i class="ft ft-shield"></i>&nbsp; Add To BlackList</button></div>
+</div>
+<div class="card mt-4">
+    <div class="card-body">
+        <ng-template #content let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title font-15"> Add Device to Blacklist</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">               
+                <form [formGroup]="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Model</label>
+                            <input class="form-control" formControlName="devicemodel"  id="validationCustom02" type="text">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Device Id</label>
+                            <input class="form-control" formControlName="deviceid" id="validationCustom03" type="text" >
+                           
+                        </div>
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">IMEI</label>
+                                <input class="form-control" formControlName="imei" id="validationCustom03" type="text" >                                
+                            </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-danger" (click)="addmethod()"><i class="ft ft-shield mr-2"></i>Blacklist</button>
+                        </div>
+                    </form>
+            </div>
+        </ng-template>
+        <div class="">
+            <div id="dt-base_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                        <div class="col-md-3">
+                                <div class="input-group-icon input-group-icon-left input-group-lg mb-4"><span class="input-icon input-icon-left"><i class="ti-search"></i></span><input class="form-control font-weight-light border-0" type="text" placeholder="Search ..." style="box-shadow:0 3px 6px rgba(10,16,20,.15);"></div>
+    
+                        </div>
+                    
+                    <div class="col-sm-6 col-md-9">
+                            <!-- <div class="form-inline  mb-3 pull-right">
+                                    <i class="fas fa-search" aria-hidden="true"></i>
+                                    <input class="form-control form-control-sm ml-3" type="text" placeholder="Search" 
+                                    aria-label="Search">
+                            </div> -->
+                        <!-- <div id="dt-base_filter" class="dataTables_filter pull-right mr-3 mb-4"><input type="search"  class="form-control form-control-sm" placeholder="Search" aria-controls="dt-base"></div> -->
+                    </div>
+                </div>
+                <div style="overflow-x:auto;">
+                    <table class="table table-striped table-hover table-hover w-100 dataTable" id="dt-base">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Model</th>
+                                <th class="text-left">Device ID</th>
+                                <th class="text-left">IMEI</th>
+                                <th class="text-center">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor=" let device of list">
+                                <td>{{device.devmodel}}</td>
+                                <td>{{device.deviceid}}</td>
+                                <td>{{device.imei}}</td>
+                                <td class="text-center" style="cursor:pointer"><a (click)="deleteDevice(device._id)"><i class="text-danger ti-close"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>    
+                <div class="row">
+                    <div class="col-md-12">
+                        <div> 
+                            <mat-progress-spinner  style="margin:0 auto;"
+                                class = "tp-margin"
+                                [diameter]="50" 
+                                [color] = "color"
+                                [mode] = "mode"
+                                [value] = "values" *ngIf="showSpinner">
+                                </mat-progress-spinner>
+                        </div>
+                        <div *ngIf="show" >
+                            <div class="text-center animated zoomIn  mt-3">
+                                    <img src="assets/img/image.png" class="animated shake">
+                                <p>No Transactions Yet</p> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="list?.length > 0">
+                    <div class="col-sm-12 col-md-9">
+
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="dataTables_paginate paging_simple_numbers" id="dt-base_paginate">
+                            <ul class="pagination justify-content-end">
+                                <!-- <li class="paginate_button page-item previous disabled" id="dt-base_previous"><a href="#" aria-controls="dt-base" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li> -->
+                                <li class="paginate_button page-item active"><span aria-controls="dt-base" data-dt-idx="1" tabindex="0" class="page-link">1</span></li>
+                                <!-- <li class="paginate_button page-item "><a href="#" aria-controls="dt-base" data-dt-idx="2" tabindex="0" class="page-link">2</a></li> -->
+                                <!-- <li class="paginate_button page-item next" id="dt-base_next"><a href="#" aria-controls="dt-base" data-dt-idx="7" tabindex="0" class="page-link">Next</a></li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #LoginModal let-modal>
+    <app-modal></app-modal>
+</ng-template>

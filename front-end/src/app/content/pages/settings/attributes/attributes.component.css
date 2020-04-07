@@ -1,0 +1,16 @@
+.list-group {
+    list-style: none !important;
+}
+
+.list-group-item {
+    display: list-item;
+    border-top: 0 none !important;
+    border-bottom: 0 none !important;
+    border-left: 0 none !important;
+    border-right: 0 none !important;
+}
+
+
+/* .delete-icon {
+    font-size: 18px;
+} */

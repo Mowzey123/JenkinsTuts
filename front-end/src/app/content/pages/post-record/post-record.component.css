@@ -1,0 +1,29 @@
+/* .form-group.required .control-label:after { 
+    color: #d00;
+    content: "*";
+    /* position: absolute;
+    margin-left: 8px;
+    top:7px;
+}*/
+
+.form-group.required .control-label:after { 
+    content:"*";
+    color:red;
+    font-family: 'Glyphicons Halflings';
+    font-weight: normal;
+    font-size: 14px;
+    margin-left: 8px;
+
+ }
+
+
+ input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}

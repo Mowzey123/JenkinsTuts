@@ -1,0 +1,44 @@
+version: '3.2'
+services:
+  authservice:
+    build: ./AuthService
+    ports:
+      - "3001:3001"
+    environment:
+    - NODE_ENV=test
+    volumes:
+      - /home/ubuntu/env/authservice/test:/secretes
+  nginx:
+    build: 
+      context: ./front-end
+      args: 
+        - configuration=
+    ports:
+      - "80:800"
+      - "443:4430"
+    environment:
+     - enviroment=test
+    volumes:
+      -  /etc/ssl:/etc/ssl
+      - ./config/prod:/etc/nginx/conf.d
+    emailingservice:
+      build: ./emailingService
+      environment:
+        - NODE_ENV=test
+      volumes:
+        - /home/ubuntu/env/emailing/test:/secretes
+    usermgtservice:
+      build: ./userManagementService
+      ports:
+        - "3000:3000"
+      environment:
+        - NODE_ENV=test
+      volumes:
+        - /home/ubuntu/env/usermgtservice/test:/secretes
+#perspective
+
+
+
+
+
+

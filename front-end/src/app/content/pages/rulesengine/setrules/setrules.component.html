@@ -1,0 +1,105 @@
+<div class="row">
+    <div class="col-md-9 col-sm-9">
+            <subheader title='Rules'>
+                </subheader>
+        <!-- <h5 class="box-title">Rules </h5> -->
+    </div>
+    <div class="col-md-3 col-sm-3" *ngIf="!show">
+        <button class="btn btn-primary pull-right" (click)="addRule()"><i class="ft ft-plus"></i>&nbsp;Add Rule </button>
+    </div>
+</div>
+
+<mat-progress-spinner  style="margin:0 auto;"
+    class = "tp-margin"
+    [diameter]="50" 
+    [color] = "color"
+    [mode] = "mode"
+    [value] = "values" *ngIf="showSpinner">
+</mat-progress-spinner>
+<div class="">
+
+    <div class="col-sm-12" *ngIf="show">
+            <app-rulesengine></app-rulesengine>
+
+    </div>
+</div>
+<ng-template #contents>
+    <div class="modal-body mt-3">
+        <h5>Are you sure you want to  this rule?</h5>
+      </div>
+    <div class="modal-footer">
+            <fieldset class="w-100">
+              <button class="pull-left btn btn-secondary"  (click)="dismiss()"><i class="ft ft-x"></i>&nbsp;Close</button>
+              <button class="pull-right btn btn-danger float-right"  (click)="deleterule()"><i class="ft ft-check"></i>&nbsp;Yes</button>
+            </fieldset>
+    </div>
+  </ng-template>
+<div *ngFor="let item of list; let i = index">
+    <div class="card" *ngIf="item.type === 'basic' || item.type === 'weight' || item.type === 'time' ">
+        <div class="card-header">
+            <h5 class="box-title"><i class="ft ft-hash text-primary"></i>&nbsp;<small class="text-primary">{{item._id}}</small>&nbsp;&nbsp;<span>{{item.name | titlecase}}</span></h5>
+            <div class="pull-right">
+                <span class=" text-dark" style="font-size:15px; cursor: pointer;" (click)="editrule(item)"><i class="ti-pencil widget-icon2"></i></span>
+                <span class="ml-3 text-danger" style="font-size:15px; cursor: pointer;" (click)="opens(contents,item._id)"><i class="ti-close widget-icon2" ></i></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p *ngIf="item.type === 'basic' ">If <span *ngIf="item.conditions[0].key === 'name'">{{addspaces(item.conditions[0].keylevel)}}</span> <span *ngIf="item.conditions[0].key !== 'name'">{{addspaces(item.conditions[0].key)}}</span>&nbsp; {{addspaces(item.conditions[0].operator)}} &nbsp; <span *ngIf="item.conditions[0].value !== 'mobilemoney'">{{numberWithCommas(item.conditions[0].value)}} </span> <span *ngIf="item.conditions[0].value === 'mobilemoney'">Mobile Money</span></p>
+                    <p *ngIf="item.type === 'weight' ">If {{item.conditions[0].key}}&nbsp; is &nbsp; {{numberWithCommas(item.conditions[0].from)}}&nbsp; to &nbsp;{{numberWithCommas(item.conditions[0].to)}} </p>
+                    <p *ngIf="item.type === 'time' ">If<span *ngIf="item.months?.length > 0"> {{ourmonths(item.months)}}</span> <span *ngIf="item.days?.length > 0">{{ourdays(item.days)}}</span>&nbsp; <span *ngIf="item.conditions[0].key !== 'transactionDate'">{{item.conditions[0].key}}</span><span *ngIf="item.conditions[0].key === 'transactionDate'">Transaction Date</span>&nbsp;  is  from &nbsp;{{item.conditions[0].from }} &nbsp; to &nbsp;{{item.conditions[0].to }} </p>
+                </div>
+                <div class="col-md-6">
+                    <p> <span class="font-weight-bold">Added By</span>:&nbsp;<span class="text-capitalize">{{item?.addedby?.firstname}}</span>&nbsp;<span>{{item?.addedby?.lastname}}</span></p>
+                    <p> <span class="font-weight-bold">Rule Type</span>:&nbsp;<span class="text-capitalize">{{item.type}}</span></p>
+                    <p><span class="font-weight-bold">Rule</span>:&nbsp;<span class="text-capitalize">{{item.rule}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngIf="item.type === 'combined'">
+        <div class="card-header">
+            <h5 class="box-title"><i class="ft ft-hash text-primary"></i>&nbsp;<small class="text-primary">{{item._id}}.</small>&nbsp;&nbsp;{{item.name}}</h5>
+            <div class="pull-right">
+                <span class=" text-dark" style="font-size:15px; cursor: pointer;" (click)="editrule(item)"><i class="ti-pencil widget-icon2"></i></span>
+                <span class="ml-3 text-danger " style="font-size:15px; cursor: pointer;" (click)="opens(contents,item._id)"><i class="ti-close widget-icon2" ></i></span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div *ngIf="item.conditions?.length > 1">
+                        <p *ngIf="item.conditions[0]?.type==='basic'">If  <span *ngIf="item.conditions[0].conditions.key === 'name'">{{addspaces(item.conditions[0].conditions.keylevel)}}</span> <span *ngIf="item.conditions[0].conditions.key !== 'name'">{{addspaces(item.conditions[0].conditions.key)}}</span> &nbsp; {{addspaces(item.conditions[0].conditions.operator)}} &nbsp; <span *ngIf="item.conditions[0].conditions.value !== 'mobilemoney'">{{numberWithCommas(item.conditions[0].conditions.value)}}</span><span *ngIf="item.conditions[0].conditions.value === 'mobilemoney'">Mobile Money</span> </p>
+                        <p *ngIf="item.conditions[0]?.type==='weight'">If {{item.conditions[0].conditions.key}}&nbsp; is &nbsp;{{numberWithCommas(item.conditions[0].conditions.from )}} &nbsp; to&nbsp;{{numberWithCommas(item.conditions[0].conditions.to) }}</p>
+                        <p *ngIf="item.conditions[0]?.type==='time'">If<span *ngIf="item.conditions[0].conditions.months?.length > 0">{{ourmonths(item.conditions[0].conditions.months)}}</span> <span *ngIf="item.conditions[0].conditions.days?.length > 0">{{ourdays(item.conditions[0].conditions.days)}}</span> &nbsp; <span *ngIf="item.conditions[0].conditions.key !== 'transactionDate'">{{item.conditions[0].conditions.key}}</span> <span *ngIf="item.conditions[0].conditions.key === 'transactionDate'">Transaction Date</span>&nbsp; is &nbsp;{{item.conditions[0].conditions.from }} &nbsp; to&nbsp;{{item.conditions[0].conditions.to }}</p>
+                    </div>
+                    <p class="text-uppercase">{{item.conditions[1]}}</p>
+                    <div *ngIf="item.conditions?.length > 2">
+                        <p *ngIf="item.conditions[2]?.type ==='basic'">If <span *ngIf="item.conditions[2].conditions.key === 'name'">{{addspaces(item.conditions[2].conditions.keylevel)}}</span> <span *ngIf="item.conditions[2].conditions.key !== 'name'">{{addspaces(item.conditions[2].conditions.key)}}</span>&nbsp; {{addspaces(item.conditions[2].conditions.operator)}} &nbsp; <span *ngIf="item.conditions[2].conditions.value !== 'mobilemoney'">{{numberWithCommas(item.conditions[2].conditions.value)}}</span><span *ngIf="item.conditions[2].conditions.value === 'mobilemoney'">Mobile Money</span></p>
+                        <p *ngIf="item.conditions[2]?.type ==='weight'">If {{item.conditions[2].conditions.key}}&nbsp; is &nbsp;{{numberWithCommas(item.conditions[2].conditions.from) }} &nbsp; to&nbsp;{{numberWithCommas(item.conditions[2].conditions.to)}}</p>
+                        <p *ngIf="item.conditions[2]?.type ==='time'">If<span *ngIf="item.conditions[2].conditions.months?.length > 0">{{ourmonths(item.conditions[2].conditions.months)}}</span> <span *ngIf="item.conditions[2].conditions.days?.length > 0">{{ourdays(item.conditions[2].conditions.days)}}</span> &nbsp; <span *ngIf="item.conditions[2].conditions.key !== 'transactionDate'">{{item.conditions[2].conditions.key}}</span>  <span *ngIf="item.conditions[2].conditions.key === 'transactionDate'">Transaction Date</span>&nbsp; is &nbsp;{{item.conditions[2].conditions.from }} &nbsp; to&nbsp;{{item.conditions[2].conditions.to }}</p>
+                    </div>
+
+                    <div *ngIf="item.conditions?.length > 3">
+                        <p class="text-uppercase">{{item.conditions[3]}}</p>
+                        <p *ngIf="item.conditions[4]?.type==='basic'">If <span  *ngIf="item.conditions[4].conditions.key === 'name'">{{addspaces(item.conditions[4].conditions.keylevel)}}</span> <span  *ngIf="item.conditions[4].conditions.key !== 'name'">{{addspaces(item.conditions[4].conditions.key)}}</span>  &nbsp;<span>{{addspaces(item.conditions[4].conditions.operator)}}</span> &nbsp; <span *ngIf="item.conditions[4].conditions.value !== 'mobilemoney'">{{numberWithCommas(item.conditions[4].conditions.value)}}</span> <span *ngIf="item.conditions[4].conditions.value === 'mobilemoney'">Mobile Money</span></p>
+                        <p *ngIf="item.conditions[4]?.type==='weight'">If {{item.conditions[4].conditions.key}}&nbsp; is &nbsp;{{numberWithCommas(item.conditions[4].conditions.from)}} &nbsp; to&nbsp;{{numberWithCommas(item.conditions[4].conditions.to)}}</p>
+                        <p *ngIf="item.conditions[4]?.type==='time'">If<span *ngIf="item.conditions[4].conditions.months?.length > 0">{{ourmonths(item.conditions[4].conditions.months)}}</span> <span *ngIf="item.conditions[4].conditions.days?.length > 0">{{ourdays(item.conditions[4].conditions.days)}}</span> &nbsp;<span *ngIf="item.conditions[4].conditions.key !== 'transactionDate'"> {{item.conditions[4].conditions.key}}</span><span *ngIf="item.conditions[4].conditions.key === 'transactionDate'">Transaction Date</span>&nbsp; is &nbsp;{{item.conditions[4].conditions.from }} &nbsp; to&nbsp;{{item.conditions[4].conditions.to }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <p><span class="font-weight-bold">Added By</span>:&nbsp;<span class="text-capitalize font-weight-bold">{{item?.addedby?.firstname}}</span>&nbsp;<span>{{item?.addedby?.lastname}}</span></p>
+                    <p><span class="font-weight-bold">Rule Type</span>:&nbsp;<span class="text-capitalize">{{item.type}}</span></p>
+                    <p><span class="font-weight-bold">Rule</span>:&nbsp;<span class="text-capitalize">{{item.rule}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #LoginModal let-modal>
+    <app-modal></app-modal>
+</ng-template>

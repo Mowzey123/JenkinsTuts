@@ -1,0 +1,61 @@
+
+<div class="row">
+    <div class="col-md-9">
+        <subheader title='Billing'></subheader>
+    </div>
+  </div>
+<div class="row">
+  <div class="col-lg-8" >
+      <div class="card card-fullheight" >
+          <div class="card-header">
+              <h5 class="mb-0">Plan Details</h5>
+              <div class="text-right">
+                  <!-- <button class="btn btn-primary">Change Plan</button> -->
+              </div>
+          </div>
+          <div class="card-body">
+              <h5>
+                  Usage Summary
+              </h5>
+              <div>
+                  <div class="row">
+                      <div class="col-md-6">Transactions Made</div>
+                      <div class="col-md-6">$0.0</div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer">
+              <h5>Total Usage</h5>
+              <div class="row">
+                  <div class="col-md-6">Total Transactions Made</div>
+                  <div class="col-md-6">$0.0</div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-4">
+      <div class="card card-fullheight"  >
+          <div class="card-header">
+              <h5 class="mb-0">Billing Details</h5>
+          </div>
+          <div class="card-body">
+              <h6 class="card-text" >
+                  <!-- {{list.companyname}} &nbsp; {{list.city}} &nbsp; {{list.zip}} &nbsp;{{list.country}} -->
+              </h6>
+              <p>Credit Card: &nbsp; 746004XXXXXXX2631</p>
+              <p>Card Holder: &nbsp; Xente </p>
+              <p>Expires:&nbsp; 6/2020 </p>
+              <p>
+                  <a (click)="details()">
+                      <h6 style="color: blue">Update Credit Card</h6>
+                  </a>
+              </p>
+
+              <p><a  style="color: blue">Contact Us about your bill</a></p>
+          </div>
+      </div>
+  </div>
+</div>
+<ng-template #LoginModal let-modal>
+  <app-modal ></app-modal>
+</ng-template>

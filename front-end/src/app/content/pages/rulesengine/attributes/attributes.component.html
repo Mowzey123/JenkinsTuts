@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-lg-8">
+        <subheader title='Attributes'></subheader>
+    </div>
+    <div class="col-lg-4 pull-right">
+        <!-- <div class="form-group">
+          <label for="exampleFormControlFile1">Upload Attributes</label>
+          <input type="file" name="sampleFile" (change)="upload($event.target.files)" class=" form-control-file" id="file ">
+      </div> -->
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">
+            <h5>Standard Attributes</h5>
+        </div>
+        <div class="row">
+            <div class="col-lg-4" *ngFor="let i of myattr; let j = index">
+                <div [title]="'With Icons'">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action flexbox " href="javascript:;">{{j + 1}}.&nbsp;{{i}}</a>
+                        <small class="text-muted ml-4">attribute info</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card-title">
+                    <h5>Custom Attributes</h5>
+                    <div class="text-danger small">&nbsp;&nbsp;&nbsp;* Please exclude standard attributes from the custom attributes list uploaded.</div>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="list?.length == 0">
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Upload Attributes</label>
+                    <input type="file" name="File" (change)="upload($event.target.files)" class=" form-control-file" id="file ">
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="list?.length > 0">
+                <button class="btn btn-primary pull-right" (click)="openVerticallyCentered(content)"><i class="ft ft-plus"></i>&nbsp;Add Attribute</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4" *ngFor="let i of list; let j = index">
+                <div [title]="'With Icons'">
+                    <div class="list-group">
+                        <a class="list-group-item list-group-item-action flexbox " href="javascript:;">{{j + 1}}.&nbsp;{{i.attribute}}
+                              <span class="ml-2 text-dark" style="font-size:15px;"><i class="ft ft-edit-2 widget-icon2  text-success " (click)="editAttribute(edit, i)"></i></span>
+                              <span class="ml-3 text-danger" style="font-size:15px;"><i class="ft ft-x widget-icon2 text-danger " (click)="deleteattribute(i._id)"></i></span>
+                      </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Add A Custom Attribute</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="form-group mb-4">
+            <label for="exampleInputEmail1">Attribute</label>
+            <input class="form-control" id="exampleInputEmail1" [(ngModel)]="attributedata.attribute" type="text" aria-describedby="emailHelp" placeholder="Enter Attribute"></div>
+        <div class="form-group mb-4">
+            <label for="exampleInputPassword1">Datatype</label>
+            <input class="form-control" id="exampleInputPassword1" [(ngModel)]="attributedata.datatype" type="text" placeholder="Enter Datatype">
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="addattribute()">Add</button>
+    </div>
+</ng-template>
+
+<ng-template #edit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Custom Attribute</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group mb-4">
+            <label for="exampleInputEmail1">Attribute</label>
+            <input class="form-control" id="exampleInputEmail1" [(ngModel)]="attributedata.attribute" type="text" aria-describedby="emailHelp" placeholder="Enter Attribute"></div>
+        <div class="form-group mb-4">
+            <label for="exampleInputPassword1">Datatype</label>
+            <input class="form-control" id="exampleInputPassword1" [(ngModel)]="attributedata.datatype" type="text" placeholder="Enter Datatype">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="editMyAttribute()">Save</button>
+    </div>
+</ng-template>

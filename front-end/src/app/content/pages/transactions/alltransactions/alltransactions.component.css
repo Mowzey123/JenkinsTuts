@@ -1,0 +1,84 @@
+.page-item.active .page-link {
+  z-index: 1;
+  color: #fff;
+  background-color: #2949EF !important;
+}
+
+tfoot {
+  display: table-header-group !important;
+  vertical-align: middle;white-space: nowrap;
+  border-color: inherit;
+}
+
+
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+  /* border-top: 0 !important; */
+}
+
+img, canvas {
+  max-width: 8%;
+}
+/*
+table {
+  font-size: 11px !important;
+} */
+
+/* .search {
+  margin-top: 12%;
+} */
+
+
+
+.status {
+  text-align: center;
+}
+
+.shake {
+  animation-duration: 6s !important;
+  animation-delay: 2s !important;
+  width: 80px !important;
+  animation-iteration-count: infinite;
+}
+
+img[_ngcontent-c10] {
+  max-width: 30%;
+}
+
+
+
+/*
+.myClass .bs-datepicker-head {
+  background-color: blue !important;
+} */
+.text-primary{
+  color:#2949EF !important;
+}
+
+
+.truncate {
+  width: 110px;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+table th {
+  width: 10% !important;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  /* border-bottom: 1px solid #dee2e6 !important; */
+  border-top: 1px solid #dee2e6 !important;
+  font-weight: 600;
+}
+
+.table tbody {
+  vertical-align: bottom;
+  border-bottom: 1px solid #dee2e6 !important;
+}

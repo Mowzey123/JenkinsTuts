@@ -1,0 +1,111 @@
+<div class="row">
+    <div class="col-md-9">
+        <h5 class="text-left "><strong>Transaction ID</strong>: &nbsp;
+            <span class="text-primary font-8" *ngIf="id">{{id}}</span>
+            <span class="text-primary font-8" *ngIf="!id">N/A</span>
+        </h5>
+    </div>
+
+    <div class="col-md-3">
+      <a style="color:white !important"  (click)="back()" class="btn btn-primary pull-right"><i class="ft ft-chevron-left"></i>&nbsp;Back</a>
+        
+    </div>
+</div>
+<hr class="my-4">
+<div class="row mt-5">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Account</h5>
+                <hr>
+                <p class="card-text"><strong>Account Number</strong>: &nbsp;{{data?.accountDetails?.userId}}</p>
+                <p class="card-text"><strong>Subscription ID</strong>: &nbsp; <span class="font-size-12">N/A</span></p>
+                <p class="card-text"><strong>Phone Number</strong>: &nbsp; <span class="font-size-12">{{data?.accountDetails?.phoneno}}</span></p>
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Transaction</h5>
+                <hr>
+                <p class="card-text"><strong>Amount</strong>: &nbsp;{{numberWithCommas(data?.amount?.amount)}} <span *ngIf="!data?.amount?.amount">N/A</span></p>
+                <p class="card-text"><strong>Payment Method</strong>: &nbsp; <span *ngIf="data?.paymentMethod.name !== 'mobilemoney'">{{data?.paymentMethod.name}}</span> <span *ngIf="data?.paymentMethod.name == 'mobilemoney'">Mobile Money</span></p>
+                <p class="card-text"><strong>Product</strong>:&nbsp; {{data?.productDetails?.name}}</p>
+                <p class="card-text"><strong>Date</strong>: &nbsp;{{data?.transactionDate | date:'short'}}</p>
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Device</h5>
+                <hr>
+                <p class="card-text"><strong>Device ID</strong>: {{data?.deviceDetails?.deviceId}}</p>
+                <p class="card-text"><strong>IMEI</strong>: {{data?.deviceDetails?.imei}}</p>
+                <p class="card-text"><strong>Channel ID</strong>: N/A</p>
+                <!-- <p class="card-text">Address :</p> -->
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Card Details</h5>
+                <hr>
+                <p class="card-text"><strong>Card Type</strong>:&nbsp;<span>N/A</span></p>
+                <p class="card-text"><strong>Prefix</strong>:&nbsp;<span>{{ data?.paymentMethod?.details?.prefix }}</span></p>
+                <p class="card-text"><strong>Suffix</strong>:&nbsp;<span>{{ data?.paymentMethod?.details?.suffix }}</span></p>
+                <!-- <p class="card-text"><strong>Address</strong>:&nbsp;<span>N/A</span></p> -->
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Recipient</h5>
+                    <hr>
+                    <p class="card-text"><strong>Recipient Number</strong>:&nbsp;<span *ngIf="recdata?.rcphone">{{recdata?.rcphone}}</span> <span *ngIf="!recdata?.rcphone">N/A</span></p>
+                    <p class="card-text"><strong>Account Number</strong>:&nbsp;<span *ngIf="recdata?.rcaccno">{{recdata?.rcaccno}}</span> <span *ngIf="!recdata?.rcaccno">N/A</span></p>
+                    <p class="card-text"><strong>Utility Number</strong>:&nbsp;<span *ngIf="recdata?.rcutilityno">{{recdata?.rcutilityno}}</span><span *ngIf="!recdata?.rcutilityno">N/A</span></p>
+                    <div class="flexbox">
+                        <a href="#"></a>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+<ng-template #LoginModal let-modal>
+    <app-modal></app-modal>
+</ng-template>
+
+
+
+
+
+
+

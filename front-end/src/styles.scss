@@ -1,0 +1,154 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Perfect scrollbar
+@import '~perfect-scrollbar/css/perfect-scrollbar';
+
+// ngx-datatable
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/material.css'; // for material style tables
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+
+//
+// Icons
+//
+
+@import "~cd-themify-icons/index.css";
+@import "./assets/vendors/feather-icons/feather.css";
+@import "./assets/vendors/line-awesome/css/line-awesome.min.css";
+
+@import "~material-design-icons/iconfont/material-icons.css";
+
+// Prism.js
+@import '~prismjs/themes/prism.css';
+
+
+// Theme Core Styles (components, layout, ...)
+@import '@theme/scss/core';
+
+
+// Angular Material theming
+@import 'theme';
+
+
+.ps__rail-y, .ps__rail-x {
+	z-index: 2;
+}
+
+mat-icon{
+font-family: 'Material Icons' !important;
+}
+
+.mat-checkbox-layout {
+	margin-bottom: 0;
+}
+
+.mat-table {
+    width: 100%;
+}
+
+.cdk-overlay-container {
+	z-index: $zindex-backdrop;
+}
+
+
+.material-modal {
+	width: 600px;
+	.mat-dialog-container {
+		padding: 0;
+		.dialog-content-wrapper {
+		    max-height: 85vh;
+		    display: flex;
+		    flex-direction: column;
+		}
+		.mat-dialog-header {
+			padding: 24px 24px 20px 24px;
+			.mat-dialog-title {margin-bottom: 0}
+		}
+		.mat-dialog-content {
+			margin: 0;
+			padding: 24px;
+		}
+		.mat-dialog-actions {
+		    padding: 8px 24px;
+			margin-bottom: 0;
+		}
+	}
+}
+
+
+
+@-webkit-keyframes zoomIn {
+	0% {
+		-webkit-transform: scale(.5);
+		transform: scale(.5);
+		opacity: 0
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+		opacity: 1
+	}
+}
+
+@keyframes zoomIn {
+	0% {
+		-webkit-transform: scale(.5);
+		transform: scale(.5);
+		opacity: 0
+	}
+	100% {
+		-webkit-transform: scale(1);
+		transform: scale(1);
+		opacity: 1
+	}
+}
+
+ngb-modal-window {
+	.modal-dialog {
+		animation-name: zoomIn;
+		animation-duration: .15s;
+		animation-timing-function: ease-in-out;
+	}
+}
+
+ngb-accordion .card {
+	margin-bottom: 0;
+}
+
+.nav-pills-solid .nav-link:not(.active) {
+    color: #212529;
+    background-color: #e3e3f2;
+}
+
+
+// Ngx dropzone reset
+
+.dropzone.custom-style > .dropzone.dz-wrapper .dz-message {
+	padding: 20px;
+	background-color: #fff;
+	.dz-text {
+		position: static;
+		top: auto;
+		transform: none;
+		padding: 8px 0;
+	}
+}
+
+.theme-dark-blue .bs-datepicker-head {
+	background-color:#2949ef;;
+  }
+ 
+  .theme-dark-blue .bs-datepicker-body table td span.selected, .theme-dark-blue .bs-datepicker-body table td.selected span, .theme-dark-blue .bs-datepicker-body table td span[class*="select-"]:after, .theme-dark-blue .bs-datepicker-body table td[class*="select-"] span:after {
+   background-color: #2949ef;;
+ }
+
+ .card{
+	border: none !important;
+  }
+
+
+  .alert-danger {
+	color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}

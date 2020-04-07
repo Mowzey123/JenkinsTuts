@@ -1,0 +1,186 @@
+<!-- <div class="row">
+  <div class="col-md-9">
+      <subheader title='Rules'></subheader>
+  </div>
+  <div class="col-md-3">
+      <a routerLink="/Rac/SetRules" class="btn btn-primary pull-right"><i class="ft ft-chevron-left"></i>&nbsp;Back</a>
+  </div>
+</div> -->
+
+<div class="card ">
+  <div class="card-body">
+      <div class="justify-content-between mb-1 mt-3">
+          <h5 class="box-title">Select Rule Type</h5>
+      </div>
+      <div class="row ml-1 mb-5">
+          <div fullheight="true">
+              <div>
+                  <label class="radio radio-primary">
+                    <input type="radio" name="e"  [(ngModel)]="rule.options" value="Basic" >
+                    <span>Basic</span> <small class="text-muted ml-3">Uses a single attribute to define the fraud rule, for example If Payment method is equal to Card then block.</small>
+                  </label> <br>
+                  <label class="radio radio-primary">
+                      <input type="radio" [(ngModel)]="rule.options" name="e" value="Weight Based">
+                      <span>Weighted</span> <small  class="text-muted ml-3">Uses a range of values associated with a single attribute to define the fraud rule, for example If amount is between 300k to 500k then block.</small><br>
+                  </label> <br>
+                  <label class="radio  radio-primary">
+                      <input type="radio" [(ngModel)]="rule.options"  name="e" value="Time Based">
+                      <span>Timed</span> <small  class="text-muted ml-3">Applies a time frame to a given attribute to set a fraud rule, for example If transaction date is between 24 December and 25 December then flag.</small>
+                  </label> <br>
+                  <label class="radio  radio-primary">
+                      <input type="radio" [(ngModel)]="rule.options" name="e" value ="Combined Rule">
+                      <span>Combined</span> <small  class="text-muted ml-3">Uses multiple attributes and respective conditions (Basic, Time based, Weight based) for each of these attributes to define the fraud rule.For example If Payment method = card and transaction amount is greater than 200k then flag.</small>
+                  </label>
+              </div>
+          </div>
+      </div>
+
+      <div class="card-title mt-5">
+          <h5>Standard Attributes</h5>
+      </div>
+      <div class="row">
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="transactionID"
+                    value="transactionID"
+                    (change)="change1($event, 'transactionId', 'transactionId', 'string')">
+                    <span class="span">Transaction Id</span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="transactionDate"
+                    value="transactionDate"
+                    (change)="change1($event, 'transactionDate', 'time', 'string')">
+                    <span class="span">transaction Date</span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="time"
+                    value="time"
+                    (change)="change1($event, 'time', 'time', 'string')">
+                    <span class="span">Time</span><br>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="deviceDetails"
+                    value="deviceDetails"
+                    (change)="change1($event, 'deviceID', 'deviceDetails', 'string')">
+                    <span class="span">Device </span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="accountDetails"
+                    value="accountDetails"
+                    (change)="change1($event, 'userId' ,'accountDetails','string')">
+                    <span class="span">Account </span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="Amount"
+                    value="Amount"
+                    (change)="change1($event, 'amount', 'amount', 'number')">
+                    <span class="span">Amount</span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="paymentMethod"
+                    value="paymentMethod"
+                    (change)="change1($event, 'name', 'paymentMethod', 'String')">
+                    <span class="span">Payment Method</span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted ">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="productDetails"
+                    value="productDetails"
+                    (change)="change1($event, 'category', 'productDetails', 'string')">
+                    <span class="span">Product Category </span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted ">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+          <div class="col-lg-3">
+              <div class="check-list">
+                  <label class="checkbox">
+                    <input type="checkbox"  name="productDetails"
+                    value="productDetails"
+                    (change)="change1($event, 'productId', 'productDetails', 'string')">
+                    <span class="span">Product Id </span>
+                    <div style="margin-left: -1rem !important;" class="pt-2"><em class="text-muted ">&nbsp;&nbsp;&nbsp;<i class="ft ft-info"></i>&nbsp;attribute info</em></div>
+
+                </label><br>
+              </div>
+          </div>
+      </div>
+      <hr *ngIf="list?.length != 0">
+      <div class="card-title" *ngIf="list?.length != 0">
+            <h5>Custom Attributes</h5> <small class="text-muted ml-3"></small>
+        </div>
+        <div class="row" *ngIf="list?.length != 0">
+          <div  *ngIf="list?.length === 0">
+            <p class="ml-4">No custom attributes uploaded yet.</p>
+          </div>
+            <div class="col-lg-3" *ngFor="let i of list">
+                <div class="check-list">
+                    <label class="checkbox">
+                      <input type="checkbox"  name="{{i.attribute}}"
+                      value="{{i.attribute}}"
+                      (change)="change($event, i.attribute, i.datatype)">
+                      <span class="span">{{i.attribute}}</span>
+                  </label><br>
+                </div>
+            </div>
+        </div>
+      <br>
+
+  </div>
+</div>
+
+
+<div class="row">
+<div class="col-lg-9 ">
+</div>
+<div class="col-lg-3 ">
+    <button routerLink="/Rac/Rules" (click)="navigateRules()" class="btn btn-success pull-right">Continue&nbsp;<i class="ft ft-chevron-right"></i></button>
+</div>
+</div>
+<ng-template #LoginModal let-modal>
+  <app-modal></app-modal>
+</ng-template>

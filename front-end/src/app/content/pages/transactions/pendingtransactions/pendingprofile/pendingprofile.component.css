@@ -1,0 +1,23 @@
+.data-widget-icon {
+    font-size: 20px;
+}
+
+.btn-danger{
+    background-color:  red !important;
+    color: white !important
+}
+
+.btn-success{
+    color: white !important;
+}
+
+.data-widget-icons {
+  /* position: absolute !important; */
+
+  font-size: 80px !important;
+
+}
+
+.text-primary{
+  color:#2949EF !important;
+}

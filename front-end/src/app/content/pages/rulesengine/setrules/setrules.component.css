@@ -1,0 +1,33 @@
+.widget-icon {
+    font-size: 25px;
+}
+
+.widget-icon2 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 25px;
+}
+
+.table tbody tr {
+    vertical-align: bottom;
+    border-bottom: 1px solid #dee2e6 !important;
+    border-top: 0px solid #dee2e6 !important;
+    /* font-weight: 600; */
+}
+
+.shake {
+    animation-duration: 6s !important;
+    animation-delay: 2s !important;
+    width: 80px !important;
+    animation-iteration-count: infinite;
+}
+
+img[_ngcontent-c10] {
+    max-width: 100% !important;
+}
+
+.text-primary{
+    color:#2949EF !important;
+  }

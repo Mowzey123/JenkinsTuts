@@ -1,0 +1,215 @@
+<div class="row">
+    <div class="col-md-8">
+        <h5 class="text-left mt-3"><strong>Transaction ID</strong>:  &nbsp;<span class="text-primary"> {{ profiledata?.transactionid }}</span> </h5>
+    </div>
+    <div class="col-md-4">
+        <span><a routerLink="/Rac/Transactions/Pendingtransactions" class="btn btn-secondary"><i class="ft ft-chevron-left"></i>&nbsp;Back</a></span>
+
+        <a class="btn btn-success pull-right ml-4" (click)="openApprove(upapprove)"><i class="ti-check  data-widget-icon"></i>&nbsp;Approve</a>
+
+        <a (click)="openDecline(updecline)" class="btn btn-danger pull-right"><i class="ti-close  data-widget-icon"></i>&nbsp;Decline</a>
+    </div>
+</div>
+
+<ng-template class="modal-content" #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Reason</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group mb-4">
+            <textarea class="form-control" [(ngModel)]="comment" rows="5" id="comment"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="approveTransaction()"><i class="ft ft-check-circle mr-2"></i>Approve</button>
+    </div>
+</ng-template>
+<ng-template class="modal-content" #decline let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Reason</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="form-group mb-4">
+            <textarea class="form-control" [(ngModel)]="comment" rows="5" id="comment"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="delineTransaction()"><i class="ft ft-slash mr-2"></i>Decline</button>
+    </div>
+</ng-template>
+
+<hr class="my-4">
+<div class="row mt-5">
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Account</h5>
+                <hr>
+                <p class="card-text"><strong>Account Number</strong>: &nbsp;{{ profiledata?.acctno }}</p>
+                <p class="card-text"><strong>Subscription Id</strong>: &nbsp;N/A <span class="font-size-12"></span></p>
+                <p class="card-text"><strong>Phone Number</strong>:&nbsp;N/A</p>
+                <p class="card-text"><strong>Creation Date</strong>: &nbsp;{{ profiledata?.creationDate}}</p>
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Transaction</h5>
+                <hr>
+                <p class="card-text"><strong>Amount</strong>: &nbsp;{{numberWithCommas(profiledata?.amount)}}</p>
+                <!-- <p class="card-text"><strong>Payment Method</strong>: &nbsp; <span *ngIf="data[0].transactiondata[0].paymentMethod.name !== 'mobilemoney'">{{data[0].transactionData[0].paymentMethod.name}}</span> <span *ngIf="data[0].transactionData[0].paymentMethod.name == 'mobilemoney'">Mobile Money</span></p> -->
+                <p class="card-text"><strong>Product</strong>:&nbsp; {{ profiledata?.product }}</p>
+                <p class="card-text"><strong>Date</strong>: &nbsp;{{ profiledata?.date | date:'short'}}</p>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title text-primary">Device</h5>
+                <hr>
+                <p class="card-text"><strong>Device ID</strong>: {{ profiledata?.deviceid }}</p>
+                <p class="card-text"><strong>IMEI</strong>: {{ profiledata?.imei }}</p>
+                <p class="card-text"><strong>Channel ID</strong>: {{ profiledata?.channelid }} </p>
+                <!-- <p class="card-text">Address :</p> -->
+                <div class="flexbox">
+                    <a href="#"></a>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-5">
+  <div class="col-lg-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title text-primary">Billing</h5>
+            <hr>
+            <p class="card-text"><strong>Card Type</strong>: &nbsp;N/A</p>
+            <p class="card-text"><strong>Credit Card Number</strong>: &nbsp;N/A</p>
+            <p class="card-text"><strong>Card Holder Name</strong>: &nbsp;N/A</p>
+            <p class="card-text"><strong>Address</strong>: &nbsp;N/A</p>
+            <div class="flexbox">
+                <a href="#"></a>
+                <div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-4">
+    <div class="card h-100">
+        <div class="card-body">
+            <h5 class="card-title text-primary">Checks Performed</h5>
+            <hr>
+            <p><strong>Blacklist Checks</strong>: <span  class="text-primary" *ngIf="profiledata?.blacklisted == false">Passed</span><span class="text-danger" *ngIf="profiledata?.blacklisted == true">Failed</span></p>
+            <p><strong>Reason</strong>:&nbsp; <span *ngIf="profiledata?.listedunder == ''">Ok</span>{{profiledata?.listedunder}} </p>
+            <hr style="border-top: dashed 1px;" />
+            <p><strong>Rules Engine</strong>: <span class="text-primary"  *ngIf="profiledata?.rulesflag == false">Passed</span><span class="text-danger" *ngIf="profiledata?.rulesflag == true ">Failed</span><span class="text-warning" *ngIf="profiledata?.rulesflag == 'pending'">Not processed</span></p>
+            <p><strong>Reason</strong>: &nbsp; <span *ngIf="profiledata?.rulesflag == false">Ok</span><span *ngIf="profiledata?.rulesflag == true">{{profiledata?.rulesengineaction}}</span></p>
+            <hr style="border-top: dashed 1px;" />
+            <p><strong>ML Checks</strong>: <span class="text-primary" *ngIf="profiledata?.fraudflag == false">Passed</span><span class="text-danger" *ngIf="profiledata?.fraudflag == true">Failed</span> <span class="text-primary" *ngIf="profiledata?.fraudflag == 'pending'">Not processed</span> </p>
+            <p><strong>Reason</strong>:&nbsp;<span *ngIf="profiledata?.fraudmessage">{{profiledata?.fraudmessage}}</span> <span *ngIf="profiledata?.fraudmessage == ''">Ok</span></p>
+            <hr style="border-top: dashed 1px;" />
+        </div>
+    </div>
+</div>
+  <div class="col-lg-4">
+      <div class="card h-100">
+          <div class="card-body">
+              <h5 class="card-title text-primary">Fraud Result</h5>
+              <hr>
+              <div class="text-center">
+                <span  *ngIf="profiledata?.finalstatus == 'onhold'" ><i class="ft ft-alert-triangle data-widget-icons text-warning"></i></span>
+                <span *ngIf="profiledata?.finalstatus == true"><i class="ft ft-alert-circle data-widget-icons text-danger"></i></span>
+                <span *ngIf="profiledata?.finalstatus == false"><i class="ft ft-check data-widget-icons text-success"></i></span>
+              </div>
+              <div>
+              <p class="card-text text-center mt-3"><span style = "font-size:25px;" *ngIf="profiledata?.finalstatus == false">Not fraud</span><span style = "font-size:25px;" class="font-25" *ngIf="profiledata?.finalstatus == true">Fraud</span><span style = "font-size:25px;" class="font-25" *ngIf="profiledata?.finalstatus == 'onhold'">On hold</span></p>
+              <div class="mt-5">
+                  <p class="card-text"><strong>Date Detected</strong>: &nbsp;<span>N/A</span></p>
+                  <p class="card-text"><strong>Updates</strong>: &nbsp;<a style = "cursor: pointer;" class="text-primary" (click)="openBackDropCustomClass2(logs)">View History</a> </p>
+              </div>
+          </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<ng-template #updecline let-modal>
+<div class="modal-body mt-3 ml-3 mr-3">
+  <h5>Are you sure you want to report this transaction as fraudulent ?</h5>
+</div>
+<div class="modal-footer">
+    <fieldset class="w-100">
+  <button class="btn btn-danger" (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;No</button>
+  <button class="btn btn-success float-right"  (click)="declineModal(decline)"><i class="ft ft-check"></i>&nbsp;Yes</button>
+    </fieldset>
+</div>
+</ng-template>
+
+<ng-template #upapprove let-modal>
+    <div class="modal-body mt-3 ml-3 mr-3">
+        <h5 >Are you sure you want to report this transaction as <strong class="text-danger">NOT</strong> fraudulent ?</h5>
+      </div>
+      <div class="modal-footer">
+          <fieldset class="w-100">
+        <button   class="btn btn-danger" (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;No</button>
+        <button  (click)="approveModal(content)" class="btn btn-success float-right"><i class="ft ft-check"></i>&nbsp;Yes</button>
+          </fieldset>
+      </div>
+
+</ng-template>
+
+<ng-template #logs let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title text-primary">Update history</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      </button>
+        <span aria-hidden="true">&times;</span>
+    </div>
+    <div class="modal-body" *ngIf="logdata?.length > 0">
+        <div *ngFor="let i of logdata">
+            <p><strong  class="ml-3">Updated By</strong>:&nbsp;{{i?.userid?.firstname}} {{i?.userid?.lastname}}</p>
+            <p><strong  class="ml-3">Status Set</strong>:&nbsp;<span *ngIf="i?.fraudflag == false">Not Fraud</span><span *ngIf="i?.fraudflag == true">Fraud</span></p>
+            <p><strong  class="ml-3">Comment</strong>:&nbsp;{{i?.comment}}</p>
+            <p><strong  class="ml-3">Updated At</strong>:&nbsp;{{i?.updatedAt | date :'short'}}</p>
+            <hr style="border-top: dashed 1px;" />
+          </div>
+    </div>
+    <div class="modal-body" *ngIf="logdata?.length === 0">
+        <div >
+            <p><strong class="ml-3">Updated By</strong>:&nbsp;<span>N/A</span></p>
+            <p><strong class="ml-3">Status Set</strong>:&nbsp;<span>N/A</span></p>
+            <p><strong class="ml-3">Comment</strong>:&nbsp;<span>N/A</span></p>
+            <p><strong class="ml-3">Updated At</strong>:&nbsp;<span>N/A</span></p>
+            <hr style="border-top: dashed 1px;" />
+          </div>
+    </div>
+<div class="modal-footer">
+  <button class="btn btn-primary " (click)="modal.dismiss('Cross click')"><i class="ft ft-x"></i>&nbsp;Close</button>
+</div>
+</ng-template> 
+
+
+<ng-template #LoginModal let-modal>
+    <app-modal></app-modal>
+</ng-template>

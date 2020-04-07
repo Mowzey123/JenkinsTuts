@@ -1,0 +1,105 @@
+
+<div class="row">
+    <div class="col-md-9">
+        <subheader title='User Profile'>
+        </subheader>
+    </div>
+</div>
+
+<div class="profile">
+  <div class="card mb-4">
+      <ng-template #content let-modal>
+          <div class="modal-header">
+              <h4 class="modal-title text-primary">Change Password</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+              <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                  <div class="mb-5">
+                      <div class="form-group">
+                          <label>Old Password</label>
+                          <input type="password" formControlName="oldpassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.oldpassword.errors }" />
+                          <div *ngIf="submitted && f.oldpassword.errors" class="invalid-feedback">
+                              <div *ngIf="f.oldpassword.errors.required">Old Password is required</div>
+                              <div *ngIf="f.oldpassword.errors.minlength">Password must be at least 6 characters</div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label>New Password</label>
+                          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                              <div *ngIf="f.password.errors.required">New Password is required</div>
+                              <div *ngIf="f.password.errors.minlength">New Password must be at least 6 characters</div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label>Confirm Password</label>
+                          <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                              <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                              <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <button class="btn btn-primary pull-right"><i class="ft ft-repeat"></i>&nbsp;Change</button>
+                  </div>
+              </form>
+          </div>
+      </ng-template>
+      <div class="card-body">
+          <div class="flexbox">
+              <h5 class="card-title text-primary">Profile</h5>
+              <!-- <div>
+                  <button class="btn btn-primary " type="button" (click)="admineditprofile()">Save</button>
+              </div> -->
+          </div>
+          <hr>
+          <div class="form-row">
+              <div class="col-md-4 mb-3"><label for="validationCustom01">First Name</label><input class="form-control" id="validationCustom01" [(ngModel)]="userprofdata.firstname" type="text" placeholder="First name" value="John" required="">
+                  <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="col-md-4 mb-3"><label for="validationCustom02">Last Name</label><input class="form-control" id="validationCustom02" [(ngModel)]="userprofdata.lastname" type="text" placeholder="Last name" value="Due" required="">
+                  <div class="valid-feedback">Looks good!</div>
+              </div>
+          </div>
+          <div class="form-row">
+              <div class=" col-md-4  mb-3"><label for="exampleInputEmail1">Company Name</label>
+                  <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Company Name">
+              </div>
+              <div class="col-md-4 mb-3">
+                  <label>Number of employees</label>
+                  <select class="form-control">
+                      <option>Select</option>
+                      <option>1-9</option>
+                      <option>10-49</option>
+                      <option>50-99</option>
+                      <option>100-249</option>
+                      <option>250-499</option>
+                      <option>500-999</option>
+                      <option>1000-4999</option>
+                      <option>5000+</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row">
+              <div class=" col-md-4 mb-3">
+                  <label for="exampleInputEmail1">Phone Number</label>
+                  <!-- <international-phone-number placeholder="Phone number " name="fname" formControlName="phone" [maxlength]="20" [defaultCountry]="'in'" [(ngModel)]="userprofdata.phone" [required]="true" name="phone_number" [allowedCountries]="['ug','in', 'ca', 'us']"></international-phone-number> -->
+                  <international-phone-number [(ngModel)]="userprofdata.phone" placeholder="Enter phone number" [maxlength]="20" [defaultCountry]="'ug'" [required]="true" #phoneNumber="ngModel" name="phone_number" [allowedCountries]="['ug','rw','in', 'ca', 'us','tz','ke']"></international-phone-number>
+              </div>
+          </div>
+          <div>
+              <!-- <h5 class="card-title text-primary">Password</h5> -->
+            <p class="font-15 mt-2">Password</p>
+            <span class="mr-3">*************</span><span><a style="cursor: pointer; color: blue !important;" class="text-primary " (click)="openBackDropCustomClass(content)">Change Password</a></span>
+            <button class="btn btn-primary pull-right" type="button" (click)="admineditprofile()"><i class="ft ft-check"></i>&nbsp;Save</button>
+          </div>
+      </div>
+  </div>
+
+  <ng-template #LoginModal let-modal>
+        <app-modal ></app-modal>
+      </ng-template>
