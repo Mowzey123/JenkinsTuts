@@ -1312,7 +1312,7 @@ var LoginComponent = /** @class */ (function () {
         this.email = '';
         this.test = '';
         if (!this.authservice.isExpired()) {
-            this.router.navigate(['/Rac/Summary']);
+            this.router.navigate(['//VMCA/Bureaudashboard']);
         }
         else {
             this.authservice.logout();
@@ -1360,7 +1360,7 @@ var LoginComponent = /** @class */ (function () {
         this.errormesg = null;
     };
     LoginComponent.prototype.donavigation = function () {
-        window.location.replace('Rac/Summary');
+        window.location.replace('/VMCA/Bureaudashboard');
     };
     LoginComponent.prototype.ShowError = function () {
         this.errormesg = this.result.msg;
@@ -1875,8 +1875,8 @@ var LoadingComponent = /** @class */ (function () {
     };
     LoadingComponent.prototype.donavigation = function () {
         setTimeout(function () {
-            window.location.replace('Rac/Summary');
-            // this.router.navigate(['Rac/Summary']);
+            window.location.replace('/VMCA/Bureaudashboard');
+            // this.router.navigate(['/VMCA/Bureaudashboard']);
         }, 0);
     };
     LoadingComponent = __decorate([
@@ -13561,7 +13561,7 @@ var FooterModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul class=\"navbar-nav mr-auto\">\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link navbar-icon sidebar-toggler\" id=\"sidebar-toggler\" href=\"javascript:;\" (click)=\"toggleSidebar($event)\">\r\n              <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </a>\r\n      \r\n    </li>\r\n    <li class=\"nav-item  d-none d-sm-inline-block\">\r\n      \r\n        <h1 class=\"headerTitle\">{{companyname}}</h1>\r\n\r\n    </li>\r\n</ul>\r\n<ul class=\"navbar-nav\">\r\n    <li class=\"nav-item dropdown\" placement='bottom-right'>\r\n        <a routerLink=\"/Rac/Summary\" class=\"nav-link dropdown-toggle navbar-icon\" href=\"javascript:;\">\r\n            <i class=\"ft-bell position-relative\"></i><span *ngIf=\"test && test != 'No Transaction registered yet'\" class=\"notify-signal bg-warning\"></span>\r\n        </a>\r\n    </li>\r\n    <li class=\"nav-divider \"></li>\r\n    <li class=\"nav-item dropdown \" ngbDropdown placement='bottom-right'>\r\n        <a class=\"nav-link dropdown-toggle no-arrow d-inline-flex align-items-center \" ngbDropdownToggle href=\"javascript:; \">\r\n            <span class=\"d-none d-sm-inline-block mr-2 \">{{firstname}} {{lastname}} &nbsp;  </span>\r\n            <img class=\"rounded-circle \" src=\"assets/img/users/dummy-avatar.jpg \" alt=\"image \" width=\"36 \" />\r\n        </a>\r\n        <div class=\"dropdown-menu pt-0 pb-4 \" ngbDropdownMenu style=\"min-width: 280px; \">\r\n            <div class=\"p-4 mb-4 media align-items-center text-white \" style=\"background-color: #2c2f48; \">\r\n                <img class=\"rounded-circle mr-3 \" src=\"./assets/img/users/dummy-avatar.jpg \" alt=\"image \" width=\"55 \" />\r\n                <div class=\"media-body \">\r\n                    <div class=\"font-13 \">{{companyname}}</div>\r\n                </div>\r\n            </div>\r\n            <div class=\"mx-4 \">\r\n                <a class=\"btn btn-link p-0 \" (click)=\"logout() \" href=\"javascript:; \"><span class=\"btn-icon \"><i class=\"ft-power mr-2 font-18 \"></i>Logout</span></a>\r\n            </div>\r\n        </div>\r\n    </li>\r\n\r\n</ul>\r\n"
+module.exports = "<ul class=\"navbar-nav mr-auto\">\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link navbar-icon sidebar-toggler\" id=\"sidebar-toggler\" href=\"javascript:;\" (click)=\"toggleSidebar($event)\">\r\n              <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n            <span class=\"icon-bar\"></span>\r\n        </a>\r\n      \r\n    </li>\r\n    <li class=\"nav-item  d-none d-sm-inline-block\">\r\n      \r\n        <h1 class=\"headerTitle\">{{companyname}}</h1>\r\n\r\n    </li>\r\n</ul>\r\n<ul class=\"navbar-nav\">\r\n    <li class=\"nav-item dropdown\" placement='bottom-right'>\r\n        <a routerLink=\"//VMCA/Bureaudashboard\" class=\"nav-link dropdown-toggle navbar-icon\" href=\"javascript:;\">\r\n            <i class=\"ft-bell position-relative\"></i><span *ngIf=\"test && test != 'No Transaction registered yet'\" class=\"notify-signal bg-warning\"></span>\r\n        </a>\r\n    </li>\r\n    <li class=\"nav-divider \"></li>\r\n    <li class=\"nav-item dropdown \" ngbDropdown placement='bottom-right'>\r\n        <a class=\"nav-link dropdown-toggle no-arrow d-inline-flex align-items-center \" ngbDropdownToggle href=\"javascript:; \">\r\n            <span class=\"d-none d-sm-inline-block mr-2 \">{{firstname}} {{lastname}} &nbsp;  </span>\r\n            <img class=\"rounded-circle \" src=\"assets/img/users/dummy-avatar.jpg \" alt=\"image \" width=\"36 \" />\r\n        </a>\r\n        <div class=\"dropdown-menu pt-0 pb-4 \" ngbDropdownMenu style=\"min-width: 280px; \">\r\n            <div class=\"p-4 mb-4 media align-items-center text-white \" style=\"background-color: #2c2f48; \">\r\n                <img class=\"rounded-circle mr-3 \" src=\"./assets/img/users/dummy-avatar.jpg \" alt=\"image \" width=\"55 \" />\r\n                <div class=\"media-body \">\r\n                    <div class=\"font-13 \">{{companyname}}</div>\r\n                </div>\r\n            </div>\r\n            <div class=\"mx-4 \">\r\n                <a class=\"btn btn-link p-0 \" (click)=\"logout() \" href=\"javascript:; \"><span class=\"btn-icon \"><i class=\"ft-power mr-2 font-18 \"></i>Logout</span></a>\r\n            </div>\r\n        </div>\r\n    </li>\r\n\r\n</ul>\r\n"
 
 /***/ }),
 
@@ -14084,7 +14084,7 @@ module.exports = "/* body {\r\n    font-size: 15px !important;\r\n} */"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<perfect-scrollbar class=\"pb-4\">\n\n<div class=\"sidebar-header\">\n    <a  style=\"cursor: pointer; color:black; margin-left: 10%\" class=\"sidebar-brand\" [routerLink]=\"['/Rac/Summary']\" ><img  src=\"assets/img/55829102_659181864517992_1947812349280780288_o.jpg\" alt=\"image \" width=\"150\" /></a>\n            \n            <a class=\"sidebar-brand-mini\"><img  src=\"assets/img/55829102_659181864517992_1947812349280780288_o.jpg\" alt=\"image \" width = \"150\" /> </a>\n \n</div>\n<app-navigation></app-navigation>\n</perfect-scrollbar>\n"
+module.exports = "<perfect-scrollbar class=\"pb-4\">\n\n<div class=\"sidebar-header\">\n    <a  style=\"cursor: pointer; color:black; margin-left: 10%\" class=\"sidebar-brand\" [routerLink]=\"['//VMCA/Bureaudashboard']\" ><img  src=\"assets/img/55829102_659181864517992_1947812349280780288_o.jpg\" alt=\"image \" width=\"150\" /></a>\n            \n            <a class=\"sidebar-brand-mini\"><img  src=\"assets/img/55829102_659181864517992_1947812349280780288_o.jpg\" alt=\"image \" width = \"150\" /> </a>\n \n</div>\n<app-navigation></app-navigation>\n</perfect-scrollbar>\n"
 
 /***/ }),
 

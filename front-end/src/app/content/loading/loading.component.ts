@@ -19,8 +19,8 @@ export class LoadingComponent implements OnInit {
 
   donavigation() {
     setTimeout(() => {
-        window.location.replace('Rac/Summary');
-        // this.router.navigate(['Rac/Summary']);
+        window.location.replace('/VMCA/Bureaudashboard');
+        // this.router.navigate(['/VMCA/Bureaudashboard']);
     }, 0);
   }
 }

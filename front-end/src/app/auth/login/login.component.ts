@@ -83,7 +83,7 @@ onClosed(danger) {
 }
 
 donavigation(): void {
-  window.location.replace('Rac/Summary');
+  window.location.replace('/VMCA/Bureaudashboard');
 }
 
 ShowError(): void {
