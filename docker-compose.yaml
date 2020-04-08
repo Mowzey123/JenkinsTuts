@@ -14,8 +14,8 @@ services:
       args: 
         - configuration=
     ports:
-      - "80:800"
-      - "443:4430"
+      - "800:80"
+      - "4430:443"
     environment:
      - enviroment=test
     volumes:
