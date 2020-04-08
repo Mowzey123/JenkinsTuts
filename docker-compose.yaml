@@ -21,20 +21,20 @@ services:
     volumes:
       -  /etc/ssl:/etc/ssl
       - ./config/prod:/etc/nginx/conf.d
-    emailingservice:
-      build: ./emailingService
-      environment:
-        - NODE_ENV=test
-      volumes:
-        - /home/ubuntu/env/emailing/test:/secretes
-    usermgtservice:
-      build: ./userManagementService
-      ports:
-        - "3000:3000"
-      environment:
-        - NODE_ENV=test
-      volumes:
-        - /home/ubuntu/env/usermgtservice/test:/secretes
+  emailingservice:
+    build: ./emailingService
+    environment:
+      - NODE_ENV=test
+    volumes:
+      - /home/ubuntu/env/emailing/test:/secretes
+  usermgtservice:
+    build: ./userManagementService
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=test
+    volumes:
+      - /home/ubuntu/env/usermgtservice/test:/secretes
 #perspective
 
 
