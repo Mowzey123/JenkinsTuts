@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService,
     private route: ActivatedRoute) {
       if (!this.authservice.isExpired()) {
-        this.router.navigate(['/Rac/Summary']);
+        this.router.navigate(['/VMCA/Bureaudashboard']);
       } else {
         this.authservice.logout();
       }
