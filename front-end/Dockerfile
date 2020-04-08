@@ -1,5 +1,5 @@
 # stage 1
-FROM mhart/alpine-node:12.16 as node
+FROM mhart/alpine-node:13.12.0 as node
 WORKDIR /app
 COPY . .
 RUN npm install
