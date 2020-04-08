@@ -5,7 +5,7 @@ COPY . .
 RUN npm install
 
 ARG configuration=production
-RUN npm run build -- --output-path=./dist --configuration $configuration   --extract-css=true --sourceMap=false  --build-optimizer=true --vendor-chunk=true 
+RUN npm run build -- --output-path=./dist --configuration $configuration   --extract-css=true --sourceMap=false  --vendor-chunk=true 
 # RUN npm run build --environment=$env
 
 # stage 2do
