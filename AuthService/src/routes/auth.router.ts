@@ -57,10 +57,7 @@ class authRouter{
           })(req, res);
     }
     
-    //have no mobile app signin
-    mobileAppEmailSignIn(req:Request,res:Response){
-        
-    }//have no mobile app signin
+  
 
     renewAuthKey(req:Request,res:Response){
         if(req.headers.authorization){
